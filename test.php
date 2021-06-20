@@ -1,12 +1,12 @@
 <?php
- $servername = 'localhost';
- $username = 'username';
- $password = 'password';
+# $servername = 'localhost';
+# $username = 'username';
+# $password = 'password';
   
- $conn = new mysqli($servername, $username, $password)
+# $conn = new mysqli($servername, $username, $password)
 
 
- $filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv"; 
+ #$filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv"; 
  $row = 1;
  if (($handle = fopen('Table.Loaner.csv', 'r')) != FALSE) {
   while (($data = fgetcsv($handle, 1000, ',')) != FALSE) {

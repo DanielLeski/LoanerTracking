@@ -14,10 +14,17 @@ $CHECK_OUT = [];
 $STATUS = [];
 $CHECK_IN = [];
 
-
+#Reading in the file 
 $file = fopen('Table.Loaner.csv', 'r');
 while(($row = fgetcsv($file, 0, ",")) != FALSE){
-  var_dump($row[0]);
+ $id = var_dump($row[0]);
 }
+
+
+foreach($id as $value) {
+  echo $value;
+}
+
+
 
 ?>

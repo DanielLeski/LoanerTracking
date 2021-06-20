@@ -14,6 +14,10 @@
   - Get in the time that the turn in process was done.
   - Get the item that such device is returned 
 
+## Steps
+- Create mysql to get table of data to show
+- Get the arrays to contains each column that we need 
+  - Getting in from the var_dump and indexing [] for columns
 
 
 

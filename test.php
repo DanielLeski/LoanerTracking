@@ -1,4 +1,12 @@
 <?php
+<<<<<<< HEAD
+=======
+# $servername = 'localhost';
+# $username = 'username';
+# $password = 'password';
+  
+# $conn = new mysqli($servername, $username, $password)
+>>>>>>> 9cd6c5478847b45520fd682767cee60261f62337
 
 #information storage for all of the columns
 $id = [];
@@ -35,5 +43,21 @@ $filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv";
  barcode: <input type="barcode(ITR)" name="ITR" value="<?php echo $barcode;?>">
  </textarea>
 
+<<<<<<< HEAD
+=======
+ #$filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv"; 
+ $row = 1;
+ if (($handle = fopen('Table.Loaner.csv', 'r')) != FALSE) {
+  while (($data = fgetcsv($handle, 1000, ',')) != FALSE) {
+      $num = count($data);
+      echo "<p> $num fields in line $row: <br /></p>\n";
+		  $row++;
+		  for ($c=0; $c < $num; $c++) {
+			  echo $data[$c] . "<br />\n";
+		}
+	}
+	fclose($handle);
+ }
+>>>>>>> 9cd6c5478847b45520fd682767cee60261f62337
 
 ?>

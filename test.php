@@ -1,12 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-# $servername = 'localhost';
-# $username = 'username';
-# $password = 'password';
-  
-# $conn = new mysqli($servername, $username, $password)
->>>>>>> 9cd6c5478847b45520fd682767cee60261f62337
 
 #information storage for all of the columns
 $id = [];
@@ -22,8 +14,15 @@ $CHECK_OUT = [];
 $STATUS = [];
 $CHECK_IN = [];
 
+
+#Array for the chromebooks that are being taken out as for loaners
+$CB_TAKEN = [];
+
+
+#Chromebooks that are ready to be taken out
+$CB_AV = [];
+
 #reading the file and getting the information to each array
-$filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv"; 
  $file = fopen('Table.Loaner.csv', 'r');
  while (($row = fgetcsv($file, 0, ',')) != FALSE) {
    array_push($id, $row[0]);
@@ -38,26 +37,16 @@ $filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv";
    array_push($CHECK_OUT, $row[9]);
    array_push($STATUS, $row[10]);
    array_push($CHECK_IN, $row[11]);
- } 
- 
- barcode: <input type="barcode(ITR)" name="ITR" value="<?php echo $barcode;?>">
- </textarea>
-
-<<<<<<< HEAD
-=======
- #$filename = "/Users/smol/fun/PH_CB/Table.Loaner.csv"; 
- $row = 1;
- if (($handle = fopen('Table.Loaner.csv', 'r')) != FALSE) {
-  while (($data = fgetcsv($handle, 1000, ',')) != FALSE) {
-      $num = count($data);
-      echo "<p> $num fields in line $row: <br /></p>\n";
-		  $row++;
-		  for ($c=0; $c < $num; $c++) {
-			  echo $data[$c] . "<br />\n";
-		}
-	}
-	fclose($handle);
  }
->>>>>>> 9cd6c5478847b45520fd682767cee60261f62337
+
+ #getting the users barcode
+ echo "Barcode of the device ";
+ $barcode = rtrim(fgets(STDIN));
+ echo "The Chromebook's barcode is " . $barcode;
+ array_push($CB_TAKEN, $barcode);
+
+ 
+
+
 
 ?>

@@ -54,10 +54,14 @@ $TIME_CHECKED_IN = [];
 
 
  #Get the time that it has been checked out 
+ $t = time()
+ array_push($TIME_CHECKED_OUT, $t)
 
  #Check if the user ID is present within the loaned out table
   # Let them check it in and grab the current time of that action
  
+
+
 
 
 

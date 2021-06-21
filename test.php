@@ -17,10 +17,13 @@ $CHECK_IN = [];
 
 #Array for the chromebooks that are being taken out as for loaners
 $CB_TAKEN = [];
+$student_id = [];
 
 
 #Chromebooks that are ready to be taken out
 $CB_AV = [];
+$TIME_CHECKED_OUT = [];
+$TIME_CHECKED_IN = [];
 
 #reading the file and getting the information to each array
  $file = fopen('Table.Loaner.csv', 'r');
@@ -44,7 +47,16 @@ $CB_AV = [];
  $barcode = rtrim(fgets(STDIN));
  echo "The Chromebook's barcode is " . $barcode;
  array_push($CB_TAKEN, $barcode);
+ 
+ #Enter the students ID
+ echo "Enter your student ID # ";
+ $stu_num = rtrim(fgets(STDIN));
 
+
+ #Get the time that it has been checked out 
+
+ #Check if the user ID is present within the loaned out table
+  # Let them check it in and grab the current time of that action
  
 
 

@@ -1,5 +1,4 @@
 <?php
-
 #information storage for all of the columns
 $id = [];
 $student_number = [];
@@ -41,12 +40,6 @@ $TIME_CHECKED_IN = [];
    array_push($STATUS, $row[10]);
    array_push($CHECK_IN, $row[11]);
  }
-
- #getting the users barcode
- echo "Barcode of the device ";
- $barcode = rtrim(fgets(STDIN));
- echo "The Chromebook's barcode is " . $barcode;
- array_push($CB_TAKEN, $barcode);
  
  #Enter the students ID
  echo "Enter your student ID # ";
@@ -56,30 +49,65 @@ $TIME_CHECKED_IN = [];
  #Get the time that it has been checked out 
  $current = time();
  $currentDate = date('Y-m-d', $current);
- array_push($TIME_CHECKED_OUT, $currentDate)
+ array_push($TIME_CHECKED_OUT, $currentDate);
 
 
  #Check if the user ID is present within the loaned out table
  #Let them check it in and grab the current time of that action
  
  #get user input to do a specific action
- echo "Do you want to: ";
- echo "1. Turn in a chromebook"
- echo "2. Check out a chromebook"
- echo "3. Get list of the available" 
- $user_option = 
-
-
+ echo "Use numbers(integers as input)\n ";
+ echo "Do you want to: \n";
+ echo "1. Turn in a chromebook\n";
+ echo "2. Check out a chromebook\n";
+ echo "3. Get list of the available\n"; 
+ $user_option = (int)readline('Enter one of the choices given above: ');
+ switch ($user_option) {
+  case 1:
+    turnin();
+    break;
+  case 2: 
+    checkout();
+    break;
+  case 3:
+    listofLoanersAv();
+    break;
+ }
 
  #gets the user to turn in the chromebook
  function turnin() {
+   
+ }
+
+ #get the user to checkout the chromebook
+ function checkout() {
+  echo "Barcode of the device that you are checking out";
+  $barcode = rtrim(fgets(STDIN));
+  if (!in_array($barcode, $CB_AV)) {
+    echo "This chromebook isn't updated correctly, wasn't checked in properly";
+    #moving it for now to the av array to make it avialable and then take it out and place it in the 
+    array_push($CB_AV, $barcode);
+  }else {
+    echo "The Chromebook's barcode is " . $barcode;
+    array_push($CB_TAKEN, $barcode);
+   }
+ } 
+
+ function 
+
+ #print the loaners that are aviable
+ function listOfLoanersAv() {
+
+ } 
+
+  #remove the chrome from the list that are able to be given out
+ function removeFromLoaners() {
 
  }
 
-#get the user to checkout the chromebook
+ function remove($array, $remove) {
 
-
-
+ }
 
 ?>
 

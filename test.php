@@ -60,7 +60,7 @@ $TIME_CHECKED_IN = [];
  echo "Do you want to: \n";
  echo "1. Turn in a chromebook\n";
  echo "2. Check out a chromebook\n";
- echo "3. Get list of the available\n"; 
+ echo "3. Get list of the available\n";
  $user_option = (int)readline('Enter one of the choices given above: ');
  switch ($user_option) {
   case 1:
@@ -76,7 +76,14 @@ $TIME_CHECKED_IN = [];
 
  #gets the user to turn in the chromebook
  function turnin() {
-   
+  echo "What is the barcode that you want to turn in";
+  $turn_in_barcode = rtrim(fgets(STDIN));
+  if (in_array($turn_in_barcode, $CB_AV)) {
+    echo "How is this chromebook in here already? It was just checked out";
+  }
+  else {
+
+  }
  }
 
  #get the user to checkout the chromebook
@@ -97,7 +104,7 @@ $TIME_CHECKED_IN = [];
 
  #print the loaners that are aviable
  function listOfLoanersAv() {
-
+  
  } 
 
   #remove the chrome from the list that are able to be given out
@@ -106,8 +113,14 @@ $TIME_CHECKED_IN = [];
  }
 
  function remove($array, $remove) {
-
+  $index = array_search($remove, $array);
+  if ($index != FALSE) {
+    unset($array[$index]);
+  }
  }
-
+ 
+ function add($array, $add) {
+  array_push($array, $add);
+ }
 ?>
 

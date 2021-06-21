@@ -1,4 +1,4 @@
-#PHP_CB
+# PHP_CB
 
 ## PHP Client for Chromebook Loaners
 
@@ -14,17 +14,11 @@
   - Get in the time that the turn in process was done.
   - Get the item that such device is returned 
 
-<<<<<<< HEAD
-=======
 ## Steps
 - Create mysql to get table of data to show
 - Get the arrays to contains each column that we need 
   - Getting in from the var_dump and indexing [] for columns
 
-
-
-
->>>>>>> 9cd6c5478847b45520fd682767cee60261f62337
 ## Resources:
 - https://webdiretto.it/to-extract-single-column-values-from-csv-file-php/
 - https://www.cloudways.com/blog/connect-mysql-with-php/

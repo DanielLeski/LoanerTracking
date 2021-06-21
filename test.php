@@ -41,10 +41,16 @@ $TIME_CHECKED_IN = [];
    array_push($CHECK_IN, $row[11]);
  }
  
+ while (true) { 
+
  #Enter the students ID
- echo "Enter your student ID # ";
+ echo "Enter your student ID # \n";
  $stu_num = rtrim(fgets(STDIN));
  array_push($student_id, $stu_num);
+ 
+ if (in_array($stu_num, $student_id) == 1) {
+  echo "This student already has a chromebook out! No more than 1 loaner \n"; 
+ }
 
  #Get the time that it has been checked out 
  $current = time();
@@ -61,7 +67,7 @@ $TIME_CHECKED_IN = [];
  echo "1. Turn in a chromebook\n";
  echo "2. Check out a chromebook\n";
  echo "3. Get list of the available\n";
- $user_option = (int)readline('Enter one of the choices given above: ');
+ $user_option = (int)readline("Enter one of the choices given above:\n");
  switch ($user_option) {
   case 1:
     turnin();
@@ -72,23 +78,27 @@ $TIME_CHECKED_IN = [];
   case 3:
     listofLoanersAv();
     break;
- }
+  case 4:
+    break;
+  }  
+}
 
  #gets the user to turn in the chromebook
  function turnin() {
-  echo "What is the barcode that you want to turn in";
+  echo "What is the barcode that you want to turn in ";
   $turn_in_barcode = rtrim(fgets(STDIN));
   if (in_array($turn_in_barcode, $CB_AV)) {
     echo "How is this chromebook in here already? It was just checked out";
   }
   else {
-
+    #Adding in the chromebook that was just now turned in
+    array_push($CB_AV, $barcode);
   }
  }
 
  #get the user to checkout the chromebook
  function checkout() {
-  echo "Barcode of the device that you are checking out";
+  echo "Barcode of the device that you are checking out ";
   $barcode = rtrim(fgets(STDIN));
   if (!in_array($barcode, $CB_AV)) {
     echo "This chromebook isn't updated correctly, wasn't checked in properly";
@@ -100,11 +110,11 @@ $TIME_CHECKED_IN = [];
    }
  } 
 
- function 
-
  #print the loaners that are aviable
  function listOfLoanersAv() {
-  
+  foreach($CB_AV as $av) {
+    echo '<pre>'; var_dump($av);
+  }
  } 
 
   #remove the chrome from the list that are able to be given out

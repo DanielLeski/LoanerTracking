@@ -1,4 +1,4 @@
-# PHP_CB
+#PHP_CB
 
 ## PHP Client for Chromebook Loaners
 
@@ -14,9 +14,7 @@
   - Get in the time that the turn in process was done.
   - Get the item that such device is returned 
 
-
-
-
-
 ## Resources:
 - https://webdiretto.it/to-extract-single-column-values-from-csv-file-php/
+- https://www.cloudways.com/blog/connect-mysql-with-php/
+- https://www.tutorialspoint.com/mysql/mysql-create-tables.html

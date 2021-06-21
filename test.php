@@ -51,18 +51,35 @@ $TIME_CHECKED_IN = [];
  #Enter the students ID
  echo "Enter your student ID # ";
  $stu_num = rtrim(fgets(STDIN));
-
+ array_push($student_id, $stu_num);
 
  #Get the time that it has been checked out 
- $t = time()
- array_push($TIME_CHECKED_OUT, $t)
+ $current = time();
+ $currentDate = date('Y-m-d', $current);
+ array_push($TIME_CHECKED_OUT, $currentDate)
+
 
  #Check if the user ID is present within the loaned out table
-  # Let them check it in and grab the current time of that action
+ #Let them check it in and grab the current time of that action
  
+ #get user input to do a specific action
+ echo "Do you want to: ";
+ echo "1. Turn in a chromebook"
+ echo "2. Check out a chromebook"
+ echo "3. Get list of the available" 
+ $user_option = 
 
+
+
+ #gets the user to turn in the chromebook
+ function turnin() {
+
+ }
+
+#get the user to checkout the chromebook
 
 
 
 
 ?>
+

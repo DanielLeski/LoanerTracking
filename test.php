@@ -87,7 +87,7 @@ $TIME_CHECKED_IN = [];
  function turnin() {
   echo "What is the barcode that you want to turn in ";
   $turn_in_barcode = rtrim(fgets(STDIN));
-  if (in_array($turn_in_barcode, $CB_AV)) {
+  if (!empty($CB_AV)) && (in_array($turn_in_barcode, $CB_AV)) {
     echo "How is this chromebook in here already? It was just checked out";
   }
   else {
@@ -100,7 +100,7 @@ $TIME_CHECKED_IN = [];
  function checkout() {
   echo "Barcode of the device that you are checking out ";
   $barcode = rtrim(fgets(STDIN));
-  if (!in_array($barcode, $CB_AV)) {
+  if (!empty($CB_AV)) && (!in_array($barcode, $CB_AV)) {
     echo "This chromebook isn't updated correctly, wasn't checked in properly";
     #moving it for now to the av array to make it avialable and then take it out and place it in the 
     array_push($CB_AV, $barcode);

@@ -12,7 +12,7 @@ $GROUP = array();
 $CHECK_OUT = array();
 $STATUS = array();
 $CHECK_IN = array();
-
+?
 
 #Array for the chromebooks that are being taken out as for loaners
 $CB_TAKEN = array();

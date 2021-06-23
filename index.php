@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Chromebook/Charger Loaner System</title>
+  <?php echo "Chromebook/Charger Loaner System";?>
   </body>
  </html>
 

@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "csv-parser": "^3.0.0"
+    "csv": "^5.5.0",
+    "csv-parser": "^3.0.0",
+    "csv-write-stream": "^2.0.0",
+    "node-csv": "^0.1.2",
+    "prompt-sync": "^4.2.0",
+    "read-last-lines": "^1.8.0"
   }
 }

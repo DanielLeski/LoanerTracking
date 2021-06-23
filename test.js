@@ -2,18 +2,12 @@
 //Reading in the csv data from Table.Loaner.csv
 const csv = require('csv-parser');
 const fs = require('fs');
-const results = [];
 const readline = require('readline');
-const express = require('express');
-const logger = require('morgan');
-
-
-
-//Reading in the csv file
-//fs.createReadStream('Table.Loaner.csv')
-//  .pipe(csv())
-//  .on('data', (data)=> results.push(data))
-//  .on('end', ()=> console.log(results));
+const writer = require('csv-write-stream');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const lastLines = require('read-last-lines');
+const prompting = require('prompt-sync')();
 
 //Creating arrays to store the values 
 let username = [];
@@ -22,7 +16,7 @@ let CB_AV = [];
 let CB_OUT = [];
 var d = new Date();
 var current = d.getTime();
-
+var lastRecord;
 
 var rl = readline.createInterface({
   input: process.stdin,
@@ -31,15 +25,38 @@ var rl = readline.createInterface({
 
 var option; 
 
-rl.question("What are you trying to loan", function(answer) {
+rl.question("What are you trying to loan (Pick a number)\n 1. Charger\n 2. Chromebook", function(answer) {
   option = answer;
   console.log(answer);
   rl.close();
 });
 
-function main() {
-  console.log('HERE')
+function getInformation() {
+  const ID = prompting("What is your student ID?");
+  const BARCODE = prompting("What is the barcode )
 }
-if ()
+
+switch (option) {
+  case 1:
+    console.log('charger');
+    getInformation(); 
+    break;
+  case 2:
+    console.log('chromebook');
+    getInformation();
+    break;
+}
+
+
+
+
+//Reading in the csv file
+var gb = fs.readFileSync("Table.Loaner.csv", 'utf8').toString().split(',');
+var cpy = fs.readFileSync('Table.Loaner.csv', 'utf8').toString().split('\r');
+
+console.log("The last record placed into the csv\n");
+
+//Reading the last record that has been added to the csv
+lastLines.read('Table.Loaner.csv', 1).then((lines) => console.log(lines));
 
 

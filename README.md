@@ -23,3 +23,5 @@
 - https://webdiretto.it/to-extract-single-column-values-from-csv-file-php/
 - https://www.cloudways.com/blog/connect-mysql-with-php/
 - https://www.tutorialspoint.com/mysql/mysql-create-tables.html
+- https://stackoverflow.com/questions/10227107/write-to-a-csv-in-node-js/33589528
+- https://www.codecademy.com/articles/getting-user-input-in-node-js

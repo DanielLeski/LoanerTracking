@@ -18,7 +18,7 @@
 
 
 #reading the file and getting the information to each array
-$file = fopen('Table.Loaner.csv', 'r');
+#$file = fopen('Table.Loaner.csv', 'r');
 #$append_file = fopen('Table.Loaner.csv', 'a');
 #while (($row = fgetcsv($file, 0, ',')) != FALSE) {
  # array_push($ids, $row[0]);
@@ -38,33 +38,37 @@ $file = fopen('Table.Loaner.csv', 'r');
 $servername = "localhost";
 $username = "root";
 $password = "pk1212";
-$db_name = "newphp";
-$conn = mysqli_connect($servername, $username, $password, $db_name);
 
-$query = <<<eof
-  LOAD DATA INFILE '$file'
-  INTO TABLE data
-  FIELDS TERMINATED BY '|' OPTIONALLY ENCLOSED BY '"'
-  LINES TERMINATED BY '\n'
-  (AutoID, Student_Number, First_Name, Last_Name, ITR, Serial, MAC, Part)Number, Group, Check_out, Status, Check_in, Notes)
-eof;
+$conn = new mysqli($servername, $username, $password);
 
-$conn->query($query);
-
-$z = "SELECT * FROM newphp";
-echo "<b> <center>Database Output</center> </b> <br> <br>";
-
-if ($result = $conn->query($z)) {
-
-  while ($row = $result->fetch_assoc()) {
-    $field1name = $row["AutoID"];
-    echo '<b>'.$field1name . '<br />';
-  }
-  /*freeresultset*/
-  $result->free();
+//Create database
+$sql_db = "CREATE DATABASE newphp";
+if($conn->query($sql_db) === TRUE) {
+  echo "Database has been created";
+} else {
+  echo "Error creating database" . $conn->error;
 }
 
+$sql_table = "CREATE TABLE loaner (
+AutoID INT(6) UNSIGNED AUTO_INCREMENT,
+Student_Number INT(8) NOT NULL,
+First_Name VARCHAR(30) NOT NULL,
+Last_Name VARCHAR(50), NOT NULL,
+ITR INT(6) NOT NULL,
+Serial VARCHAR(20) NOT NULL,
+MAC VARCHAR(50) NOT NULL, 
+Group VARCHAR(10) NOT NULL,
+Check_out VARCHAR(20) NOT NULL,
+Status VARCHAR(20) NOT NULL,
+Check_in VARCHAR(20) NOT NULL,
+Notes VARCHAR(50) NOT NULL
+)";
 
+if($conn->query($sql_table) === TRUE) {
+  echo "GOOD!";
+} else {
+  echo "BAD";
+}
 
 $conn->close();
 

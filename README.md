@@ -30,3 +30,5 @@
 - https://stackoverflow.com/questions/31468215/how-to-check-if-html-forms-are-empty-or-not-with-php
 - https://stackoverflow.com/questions/13961388/display-php-array-result-in-an-html-table
 - https://docs.oracle.com/en/java/java-components/advanced-management-console/2.21/install-guide/mysql-database-installation-and-configuration-advanced-management-console.html#GUID-2B24F7E4-A00C-463F-8666-10D3D1097061
+- https://makitweb.com/how-to-export-mysql-table-data-as-csv-file-in-php/
+- https://phppot.com/php/import-csv-file-into-mysql-using-php/

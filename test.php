@@ -1,4 +1,4 @@
-}?php
+<?php
 #information storage for all of the columns
 $id = array();
 $student_number = array();

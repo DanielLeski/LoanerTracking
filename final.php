@@ -33,10 +33,11 @@ while (($row = fgetcsv($file, 0, ',')) != FALSE) {
   array_push($CHECK_OUT, $row[9]);
   array_push($STATUS, $row[10]);
   array_push($CHECK_IN, $row[11]);
+  $file.close();
 }
 
-$loan = readline("Do you want to loan a (Pick a number)\n1.Charger\n2.Chromebook\n3.Both\n");
-$loan = (int)$loan;
+#$loan = readline("Do you want to loan a (Pick a number)\n1.Charger\n2.Chromebook\n3.Both\n");
+#$loan = (int)$loan;
 
 #Current autoID number
 $last_AutoID = end($ids);
@@ -89,12 +90,7 @@ switch($loan) {
     print_r($barcode_c);
   }
   
-  function no_multiple_loaner($id) {
-    zz = array_key_exists($id, $student_number);
-    if (zz == True) {
-      print("No more loaners for you!");
-    }
-  }
+  
 
 ?>
 

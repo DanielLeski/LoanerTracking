@@ -43,32 +43,33 @@ while (($row = fgetcsv($file, 0, ',')) != FALSE) {
 $last_AutoID = end($ids);
 $today = date("d/m/Y");
 switch($loan) {
-  case 1:
-    $id = (int)readline("Enter your id number \n");
-    $device_barcode = (int)readline("Enter the barcode of the device \n");
-    $last_AutoID = $last_AutoID + 1;
-    array_push($ids, $last_AutoID);
-    array_push($CHECK_OUT,$today);
-    break;
   case 2:
-    $id = (int)readline("Enter your id number \n");
-    $charger_barcode = (int)readline("Enter the barcode of the charger \n");
-    $last_AutoID = $last_AutoID + 1;
-    array_push($ids, $last_AutoID);
-    array_push($CHECK_OUT,$today);
-    break;
+        break;
   case 3:
-    $id = (int)readline("Enter id number \n");
-    $device_barcode = (int)readline("Enter the barcode of the device \n");
-    $charger_barcode = (int)readline("Enter the barcode of the charger \n");
+       break;
+}
+
+  function loaner_chromebook($id, $barcode) {
+    $last_AutoID = $last_AutoID + 1;
+    array_push($ids, $last_AutoID);
+    array_push($CHECK_OUT,$today);
+  }
+
+  M
+  function loaner_charger($id, $bardcode) {
+    $last_AutoID = $last_AutoID + 1;
+    array_push($ids, $last_AutoID);
+    array_push($CHECK_OUT,$today); 
+  }
+
+  function loaner_both($id, $device_barcode, $charger_barcode) {
     $last_AutoID = $last_AutoID + 1;
     array_push($ids, $last_AutoID);
     $last_AutoID = $last_AutoID + 1;
     array_push($ids, $last_AutoID);
     array_push($CHECK_OUT,$today);
-    break;
-}
- 
+  }
+
   function add_av_cb($barcode) {
     array_push($CB_AV, $barcode);
   }

@@ -1,4 +1,4 @@
-﻿AutoID,Student_Number,First_Name,Last_Name,ITR,Serial,MAC,Part_Number,Group,Check_out,Status,Check_in,Notes
+﻿AutoID,Student_Number,First_Name,Last_Name,ITR,Serial,MAC,Part_Number,Grp,Check_out,Status,Check_in,Notes
 38,2212690,Gabriella,Borho,,,,,,10-Aug-20,,,
 39,2214539,Justice,Starr,30127,LR08JS63,,ZC1,,14-Aug-20,,22-Oct-20,
 40,2233095,Ibraheem,Eldeen Allam,29459,LR08CFRS,,ZC1,,18-Aug-20,,21-Oct-20,

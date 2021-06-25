@@ -41,17 +41,8 @@ $password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
-$query = <<<eof
-  LOAD DATA INFILE '$file'
-  INTO TABLE data
-  FIELDS TERMINATED BY '|' OPTIONALLY ENCLOSED BY '"'
-  LINES TERMINATED BY '\n'
-  (AutoID, Student_Number, First_Name, Last_Name, ITR, Serial, MAC, Part)Number, Group, Check_out, Status, Check_in, Notes)
-eof;
 
-$conn->query($query);
-
-$z = "SELECT * FROM newphp";
+$z = "SELECT * FROM cbdata";
 echo "<b> <center>Database Output</center> </b> <br> <br>";
 
 if ($result = $conn->query($z)) {

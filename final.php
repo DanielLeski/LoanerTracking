@@ -58,26 +58,47 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 function loaner_charger($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
-  $CHECK_OUT1_TIME = date('l js \of F Y h:i:s A');
-  $sql = "INSERT INTO cbdata (Student_number, ITR, Check_in) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME)";
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
     echo "The record is created";
   } else {
     echo "error: ". $sql . "<br>" . $conn->error;
   }
-
 }
 
 
 function loaner_chromebook($id, $barcode) {
+  global $CHECK_OUT_TIME;
   global $conn;
-  $sql = "insert into cbdata (student_number, itr) values ('$id', '$barcode')";
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
     echo "new record created";
   } else {
     echo "error: ". $sql . "<br>" . $conn->error;
   }
 }
+
+#prints the chromebooks that are ready for loan
+function print_av_cb() {
+  global $conn;
+  $cb_av_table = "SELECT * FROM repalce";
+  $rs = mysqli_query($conn, $cb_av_table);
+}
+
+#print the chargers that are ready for loan
+function print_av_chargers() {
+
+}
+
+
+#
+# These functions are used for when someone is returning a device or a charger
+# This will take their id and barcode and search for those in the mysql table
+# Then when clicked submit or enter the check_in column on that entry will update
+#
+#
 
 
 

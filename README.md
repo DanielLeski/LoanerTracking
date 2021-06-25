@@ -32,3 +32,4 @@
 - https://docs.oracle.com/en/java/java-components/advanced-management-console/2.21/install-guide/mysql-database-installation-and-configuration-advanced-management-console.html#GUID-2B24F7E4-A00C-463F-8666-10D3D1097061
 - https://makitweb.com/how-to-export-mysql-table-data-as-csv-file-in-php/
 - https://phppot.com/php/import-csv-file-into-mysql-using-php/
+- https://stackoverflow.com/questions/30681495/print-mysql-table-in-php-simple

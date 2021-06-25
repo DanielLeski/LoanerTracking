@@ -35,6 +35,8 @@ $file = fopen('Table.Loaner.csv', 'r');
  # array_push($CHECK_IN, $row[11]);
 # }
 
+
+#Connects to the sql server
 $servername = "localhost";
 $username = "root";
 $password = "pk1212";
@@ -42,19 +44,34 @@ $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 
-$z = "SELECT * FROM cbdata";
-echo "<b> <center>Database Output</center> </b> <br> <br>";
-
-if ($result = $conn->query($z)) {
-
-  while ($row = $result->fetch_assoc()) {
-    $field1name = $row["AutoID"];
-    echo '<b>'.$field1name . '<br />';
+function loaner_chromebook($id, $barcode) {
+  $sql = "INSERT INTO cbdata (Student_Number, ITR) VALUES ('$id', '$barcode')";
+  if ($conn->query($sql) === TRUE) {
+    echo "NEW RECORD CREATED";
+  } else {
+    echo "Error: ". $sql . "<br>" . $conn->error;
   }
-  /*freeresultset*/
-  $result->free();
+
 }
 
+
+
+
+
+
+#Spits out the data from the row AutoID but that can be any row an etc.
+#$z = "SELECT * FROM cbdata";
+#echo "<b> <center>Database Output</center> </b> <br> <br>";
+
+#if ($result = $conn->query($z)) {
+
+#  while ($row = $result->fetch_assoc()) {
+#    $field1name = $row["AutoID"];
+#    echo '<b>'.$field1name . '<br />';
+#  }
+  /*freeresultset*/
+#  $result->free();
+#}
 
 
 $conn->close();

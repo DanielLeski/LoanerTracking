@@ -89,7 +89,8 @@ function print_av_cb() {
 
 #print the chargers that are ready for loan
 function print_av_chargers() {
-
+  global $conn;
+  $cb_c_table = "SELECT * FROM repalce";
 }
 
 

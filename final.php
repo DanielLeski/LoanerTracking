@@ -35,6 +35,10 @@ $file = fopen('Table.Loaner.csv', 'r');
  # array_push($CHECK_IN, $row[11]);
 # }
 
+#Variables that are kept for data purposes
+$CHECK_OUT_TIME;
+$CHECK_IN_TIME;
+
 
 #Connects to the sql server
 $servername = "localhost";
@@ -43,17 +47,37 @@ $password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
+#
+# These functions are made for checking out either a chromebook or a charger 
+# These will keep track of the students ID number and the Barcode of the device that 
+# they are grabbing and the time that they checked out the device1
+#
+#
 
-function loaner_chromebook($id, $barcode) {
-  $sql = "INSERT INTO cbdata (Student_Number, ITR) VALUES ('$id', '$barcode')";
-  if ($conn->query($sql) === TRUE) {
-    echo "NEW RECORD CREATED";
+
+function loaner_charger($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT1_TIME = date('l js \of F Y h:i:s A');
+  $sql = "INSERT INTO cbdata (Student_number, ITR, Check_in) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME)";
+  if ($conn->query($sql) === true) {
+    echo "The record is created";
   } else {
-    echo "Error: ". $sql . "<br>" . $conn->error;
+    echo "error: ". $sql . "<br>" . $conn->error;
   }
 
 }
 
+
+function loaner_chromebook($id, $barcode) {
+  global $conn;
+  $sql = "insert into cbdata (student_number, itr) values ('$id', '$barcode')";
+  if ($conn->query($sql) === true) {
+    echo "new record created";
+  } else {
+    echo "error: ". $sql . "<br>" . $conn->error;
+  }
+}
 
 
 
@@ -74,7 +98,6 @@ function loaner_chromebook($id, $barcode) {
 #}
 
 
-$conn->close();
 
 #$loan = readline("Do you want to loan a (Pick a number)\n1.Charger\n2.Chromebook\n3.Both\n");
 #$loan = (int)$loan;

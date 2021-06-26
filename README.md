@@ -2,6 +2,9 @@
 
 ## PHP Client for Chromebook Loaners
 
+# Project took me 5 days to make while learning PHP and mySQL at the same time
+
+
 # TODO/ Plan:
 - Be able to get the inital csv of the current setup of the chromebooks that are out of service.
   - Read in the current google sheets data and only the data that we care about

@@ -61,10 +61,8 @@ function loaner_charger($id, $barcode) {
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
-    echo "The record is created";
-  } else {
-    echo "error: ". $sql . "<br>" . $conn->error;
-  }
+    echo "New record is correctly created";
+    }
 }
 
 
@@ -74,23 +72,18 @@ function loaner_chromebook($id, $barcode) {
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
-    echo "new record created";
-  } else {
-    echo "error: ". $sql . "<br>" . $conn->error;
-  }
+    echo "New record is correctly created";
+    }
 }
 
+#https://www.codegrepper.com/code-examples/php/php+print+table+from+mysql
 #prints the chromebooks that are ready for loan
 function print_av_cb() {
   global $conn;
-  $cb_av_table = "SELECT * FROM repalce";
-  $rs = mysqli_query($conn, $cb_av_table);
 }
 
 #print the chargers that are ready for loan
 function print_av_chargers() {
-  global $conn;
-  $cb_c_table = "SELECT * FROM repalce";
 }
 
 

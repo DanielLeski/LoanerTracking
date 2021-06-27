@@ -100,15 +100,27 @@ function print_av_chargers() {
 #
 #
 
+# Added the Check in time when found
 
+#https://www.techonthenet.com/sql/and_or.php
 function return_charger($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
+  $q = "SELECT * FROM cbdata WHERE Student_Number = '$id' AND ITR = '$barcode'";
+  $r = mysql_query($q);
+  if(mysql_num_rows($r) > 0) {
+    echo "Record is found";
+  }
 }
 
 function return_chromebook($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
+  $q = "SELECT * FROM cbdata WHERE Student_Number = '$id' AND ITR = '$barcode;";
+  $r = mysql_query($q);
+  if(mysql_num_rows($r) > 0) {
+    echo "Record if found";
+  }
 }
 
 

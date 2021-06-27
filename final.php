@@ -80,11 +80,17 @@ function loaner_chromebook($id, $barcode) {
 #prints the chromebooks that are ready for loan
 function print_av_cb() {
   global $conn;
-}
+  global $CHECK_IN_TIME;
+
+y
 
 #print the chargers that are ready for loan
 function print_av_chargers() {
+  global $conn;
+  global $CHECK_IN_TIME;
+
 }
+
 
 
 #
@@ -95,7 +101,15 @@ function print_av_chargers() {
 #
 
 
+function return_charger($id, $barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+}
 
+function return_chromebook($id, $barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+}
 
 
 #Spits out the data from the row AutoID but that can be any row an etc.

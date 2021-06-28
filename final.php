@@ -59,7 +59,7 @@ function loaner_charger($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
-  $sql = "INSERT INTO loaner_chargers (Student_Number, id, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+  $sql = "UPDATE loaner_chargers SET Student_Number='$id' WHERE id='$barcode'";
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
     }
@@ -97,6 +97,13 @@ function print_av_chargers() {
     }
   }
  } 
+
+function set_check_out_back_to_null(){
+  global $conn;
+  global $CHECK_OUT_TIME;
+  $sql = "UPDATE loaner_chargers SET Check_out=NULL AND Student_Number=NULL WHERE Check_in IS NOT NULL";
+  $conn->query($sql);
+}
 
 function add_check_out_time($barcode) {
  global $conn;

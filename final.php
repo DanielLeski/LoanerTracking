@@ -82,7 +82,7 @@ function print_av_cb() {
   global $conn;
   global $CHECK_IN_TIME;
 
-y
+}
 
 #print the chargers that are ready for loan
 function print_av_chargers() {
@@ -106,24 +106,20 @@ function print_av_chargers() {
 function return_charger($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
-  $q = "SELECT * FROM cbdata WHERE Student_Number = '$id' AND ITR = '$barcode'";
-  $r = mysql_query($q);
-  if(mysql_num_rows($r) > 0) {
-    echo "Record is found";
-  }
+  $CHECK_IN_TIME = date('Y-m-d h:i:s');
+  $q = "UPDATE cbdata SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $conn->query($q);
+  echo "Updated Charger return";
 }
 
 function return_chromebook($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
-  $q = "SELECT * FROM cbdata WHERE Student_Number = '$id' AND ITR = '$barcode;";
-  $r = mysql_query($q);
-  if(mysql_num_rows($r) > 0) {
-    echo "Record if found";
-  }
+  $CHECK_IN_TIME = date('Y-m-d h:i:s');
+  $q = "UPDATE cbdata SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $conn->query($q);
+  echo "Updated chromebook return";
 }
-
-
 #Spits out the data from the row AutoID but that can be any row an etc.
 #$z = "SELECT * FROM cbdata";
 #echo "<b> <center>Database Output</center> </b> <br> <br>";

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include('/Users/smol/fun/PHP_CB/final.php') ?>
+<?php include('/Users/smol/fun/PHP_CB/final.php')?>
 <head>
 <title>
 Chromebook/Charger Loaner System 
@@ -42,13 +42,31 @@ Checking Out
       loaner_chromebook($ids, $brs);
       //echo "Chromebook added";
   else:
-      echo "Enter your ID number and a Barcode for the Chromebook and or Charger."; 
-      
       endif;
- 
-
 ?>
+<table>
+  <tr>
+  <br>
+  <th>Chargers that are ready to take:
+  <td>
+   <?php 
+    print_av_chargers();
+    ?>
+   </td>
+   </th>
+  </tr>  
+</table>
+
+<?php
+  if(isset($_POST["Chromebook_Barcode"]) && $_POST['Chromebook_Barcode'] === ""):
+      $br = $_POST['Charger_Barcode'];
+      add_check_out_time($br);
+endif;
+ 
+?>
+
 <br>
+
 <form action='' method="post">
 <label for="ID number">ID Number</label>
   <div>
@@ -65,14 +83,24 @@ Checking Out
 <input type="submit" class="Button" name="Submit" value="Submit"/>
 </form>
 
+
 <br>
 <br>
 <br>
 
 <?php
-
-
+  if(isset($_POST["cb_b"]) && $_POST['cb_b'] === ""):
+      $id = $_POST['id'];
+      $br = $_POST['c_b'];
+      return_charger($id, $br);
+  elseif (isset($_POST['c_b']) && $_POST['c_b'] === ""):
+      $ids = $_POST['id'];
+      $brs = $_POST['cb_b'];
+      return_chromebook($ids, $brs);
+  else:
+      endif;
 ?>
+
 <h4>
  Check In Instructions:
  <br> 

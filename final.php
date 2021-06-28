@@ -18,7 +18,7 @@
 
 
 #reading the file and getting the information to each array
-$file = fopen('Table.Loaner.csv', 'r');
+#$file = fopen('Table.Loaner.csv', 'r');
 #$append_file = fopen('Table.Loaner.csv', 'a');
 #while (($row = fgetcsv($file, 0, ',')) != FALSE) {
  # array_push($ids, $row[0]);
@@ -41,7 +41,7 @@ $CHECK_IN_TIME;
 
 
 #Connects to the sql server
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username = "root";
 $password = "pk1212";
 $db_name = "newphp";
@@ -59,7 +59,7 @@ function loaner_charger($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
-  $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+  $sql = "INSERT INTO loaner_chargers (Student_Number, id, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
     }
@@ -87,10 +87,24 @@ function print_av_cb() {
 #print the chargers that are ready for loan
 function print_av_chargers() {
   global $conn;
-  global $CHECK_IN_TIME;
+  global $CHECK_OUT_TIME;
+  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+  $sql = "SELECT * FROM loaner_chargers WHERE Check_out IS NULL";
+  $r = $conn->query($sql);
+  if ($r->num_rows > 0) {
+    while($row = $r->fetch_assoc()) {
+      echo "\n" .$row['id'] . "\n";
+    }
+  }
+ } 
 
+function add_check_out_time($barcode) {
+ global $conn;
+ global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+ $sql = "UPDATE loaner_chargers SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
+ $conn->query($sql);
 }
-
 
 
 #
@@ -107,7 +121,7 @@ function return_charger($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d h:i:s');
-  $q = "UPDATE cbdata SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $q = "UPDATE loaner_chargers SET Check_in='$CHECK_IN_TIME' WHERE id='$barcode' AND Student_Number='$id'";
   $conn->query($q);
   echo "Updated Charger return";
 }

@@ -17,6 +17,10 @@
   - Get in the time that the turn in process was done.
   - Get the item that such device is returned 
 
+# WORK THAT IS LEFT:
+- Get the list of the barcodes of the chargers and Chromebooks that are going to be used
+- Display those for the user only when they are trying to check something out 
+
 ## Resources:
 - https://webdiretto.it/to-extract-single-column-values-from-csv-file-php/
 - https://www.cloudways.com/blog/connect-mysql-with-php/

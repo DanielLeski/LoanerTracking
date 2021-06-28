@@ -81,7 +81,29 @@ function loaner_chromebook($id, $barcode) {
 function print_av_cb() {
   global $conn;
   global $CHECK_IN_TIME;
+  $CHECK_OUT_TIME = date('Y-m-d h:i:s');
+  $sql = "SELECT * FROM loaner_chromebooks WHERE Check_out is NULL";
+  $r = $conn->query($sql);
+  if ($r->num_rows > 0) {
+    while($row = $r->fetch_assoc()) {
+      echo "\n" . $row['ITR'] . "\n";
+    }
+  }
+}
 
+function set_check_out_back_to_null_cb(){
+  global $conn;
+  global $CHECK_OUT_TIME;
+  $sql = "UPDATE loaner_chromebooks SET Check_out=NULL AND Student_Number=NULL WHERE Check_in IS NOT NULL";
+  $conn->query($sql);
+}
+
+function add_check_out_time_cb($barcode) {
+ global $conn;
+ global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+ $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
+ $conn->query($sql);
 }
 
 #print the chargers that are ready for loan
@@ -93,19 +115,20 @@ function print_av_chargers() {
   $r = $conn->query($sql);
   if ($r->num_rows > 0) {
     while($row = $r->fetch_assoc()) {
-      echo "\n" .$row['id'] . "\n";
+      echo "\n";
+      echo  $row['id'] ;
     }
   }
  } 
 
-function set_check_out_back_to_null(){
+function set_check_out_back_to_null_c(){
   global $conn;
   global $CHECK_OUT_TIME;
   $sql = "UPDATE loaner_chargers SET Check_out=NULL AND Student_Number=NULL WHERE Check_in IS NOT NULL";
   $conn->query($sql);
 }
 
-function add_check_out_time($barcode) {
+function add_check_out_time_c($barcode) {
  global $conn;
  global $CHECK_OUT_TIME;
  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
@@ -137,7 +160,7 @@ function return_chromebook($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d h:i:s');
-  $q = "UPDATE cbdata SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $q = "UPDATE loaner_chromebooks SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
   $conn->query($q);
   echo "Updated chromebook return";
 }

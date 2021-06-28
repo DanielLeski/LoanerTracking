@@ -36,18 +36,19 @@ Checking Out
       $br = $_POST['Charger_Barcode'];
       loaner_charger($id, $br);
       //echo "Charger added";
-  elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === ""):
-      $ids = $_POST['name'];
-      $brs = $_POST['Chromebook_Barcode'];
+  elseif (isset($_post['charger_barcode']) && $_post['charger_barcode'] === ""):
+      $ids = $_post['name'];
+      $brs = $_post['chromebook_barcode'];
       loaner_chromebook($ids, $brs);
-      //echo "Chromebook added";
+      //echo "chromebook added";
   else:
       endif;
 ?>
-<table>
+
+<table border='1'>
   <tr>
   <br>
-  <th>Chargers that are ready to take:
+  <th>Chargers that are Available
   <td>
    <?php 
     print_av_chargers();
@@ -57,13 +58,34 @@ Checking Out
   </tr>  
 </table>
 
+<table border='1'>
+  <tr>
+  <br>
+  <th>Chromebooks that are Available
+  <td>
+   <?php 
+    print_av_cb();
+    ?>
+   </td>
+   </th>
+  </tr>  
+</table>
+
+
 <?php
   if(isset($_POST["Chromebook_Barcode"]) && $_POST['Chromebook_Barcode'] === ""):
       $br = $_POST['Charger_Barcode'];
-      add_check_out_time($br);
-endif;
- 
+      add_check_out_time_c($br);
+endif; 
+  if (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === ""):
+    $brs = $_POST['Chromebook_Barcode'];
+    add_check_out_time_cb($brs);
+  endif;
+
+
 ?>
+
+
 
 <br>
 
@@ -93,6 +115,7 @@ endif;
       $id = $_POST['id'];
       $br = $_POST['c_b'];
       return_charger($id, $br);
+      set_check_out_back_to_null_c();
   elseif (isset($_POST['c_b']) && $_POST['c_b'] === ""):
       $ids = $_POST['id'];
       $brs = $_POST['cb_b'];

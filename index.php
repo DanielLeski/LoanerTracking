@@ -3,7 +3,7 @@
 <?php include('/Users/smol/fun/PHP_CB/final.php') ?>
 <head>
 <title>
-Chromebook/Charger 
+Chromebook/Charger Loaner System 
 </title>
 </head>
 
@@ -35,12 +35,12 @@ Checking Out
       $id = $_POST['name'];
       $br = $_POST['Charger_Barcode'];
       loaner_charger($id, $br);
-      echo "Charger added";
+      //echo "Charger added";
   elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === ""):
       $ids = $_POST['name'];
       $brs = $_POST['Chromebook_Barcode'];
       loaner_chromebook($ids, $brs);
-      echo "Chromebook added";
+      //echo "Chromebook added";
   else:
       echo "Enter your ID number and a Barcode for the Chromebook and or Charger."; 
       

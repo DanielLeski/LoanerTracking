@@ -1,4 +1,8 @@
 *.swp
 *.swo
+<<<<<<< HEAD
 *.csv
 *.json
+=======
+*.swm
+>>>>>>> 0aeb89b16cb5ca02af76e18437440b4cde42afa2

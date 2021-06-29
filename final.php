@@ -47,6 +47,10 @@ $password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
+
+#button
+# https://stackoverflow.com/questions/35716873/how-to-check-if-the-button-tag-is-clicked-in-php
+
 #
 # These functions are made for checking out either a chromebook or a charger 
 # These will keep track of the students ID number and the Barcode of the device that 
@@ -104,7 +108,7 @@ function print_av_cb() {
 function set_check_out_back_to_null_cb(){
   global $conn;
   global $CHECK_OUT_TIME;
-  $sql = "UPDATE loaner_chromebooks SET Check_out=NULL AND Student_Number=NULL WHERE Checked_in IS NOT NULL";
+  $sql = "UPDATE loaner_chromebooks SET Check_out=NULL, Student_Number=NULL WHERE Checked_in IS NOT NULL";
   $conn->query($sql);
 }
 
@@ -134,7 +138,7 @@ function print_av_chargers() {
 function set_check_out_back_to_null_c(){
   global $conn;
   global $CHECK_OUT_TIME;
-  $sql = "UPDATE loaner_chargers SET Check_out=NULL AND Student_Number=NULL WHERE Check_in IS NOT NULL";
+  $sql = "UPDATE loaner_chargers SET Check_out=NULL, Student_Number=NULL WHERE Check_in IS NOT NULL";
   $conn->query($sql);
 }
 

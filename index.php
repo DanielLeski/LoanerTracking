@@ -12,6 +12,9 @@ Chromebook/Charger Loaner System
 <h1 style="color:blue;">
 Chromebook/Charger Loaner System
 </h1>
+<h2>
+PLEASE RETURN YOUR DEVICE AT THE END OF THE DAY
+</h2>
 <h4>
  Check Out Instructions:
  <br> 
@@ -35,14 +38,13 @@ Checking Out
       $id = $_POST['name'];
       $br = $_POST['Charger_Barcode'];
       loaner_charger($id, $br);
-      //echo "Charger added";
-  elseif (isset($_post['charger_barcode']) && $_post['charger_barcode'] === ""):
-      $ids = $_post['name'];
-      $brs = $_post['chromebook_barcode'];
+  elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === ""):
+      $ids = $_POST['name'];
+      $brs = $_POST['Chromebook_Barcode'];
       loaner_chromebook($ids, $brs);
-      //echo "chromebook added";
-  else:
-      endif;
+      loaner_cb_log($ids, $brs);
+
+  endif;
 ?>
 
 <table border='1'>
@@ -78,15 +80,10 @@ Checking Out
       add_check_out_time_c($br);
 endif; 
   if (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === ""):
-    $brs = $_POST['Chromebook_Barcode'];
-    add_check_out_time_cb($brs);
+      $brs = $_POST['Chromebook_Barcode'];
+      add_check_out_time_cb($brs);
   endif;
-
-
 ?>
-
-
-
 <br>
 
 <form action='' method="post">
@@ -120,6 +117,8 @@ endif;
       $ids = $_POST['id'];
       $brs = $_POST['cb_b'];
       return_chromebook($ids, $brs);
+      set_check_out_back_to_null_cb();
+      update_check_in_time_in_cb_log($ids, $brs);
   else:
       endif;
 ?>
@@ -153,5 +152,6 @@ Checking In
   <div>
 <input type="submit" class="Button" name="Submit" value="Submit"/>
 </form>
+
 </head>
 </html>

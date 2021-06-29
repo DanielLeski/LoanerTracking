@@ -21,24 +21,24 @@
 #$file = fopen('Table.Loaner.csv', 'r');
 #$append_file = fopen('Table.Loaner.csv', 'a');
 #while (($row = fgetcsv($file, 0, ',')) != FALSE) {
- # array_push($ids, $row[0]);
- # array_push($student_number, $row[1]);
- # array_push($first_name, $row[2]);
- # array_push($last_name, $row[3]);
- # array_push($ITR, $row[4]);
- # array_push($Serial, $row[5]);
- # array_push($mac, $row[6]);
- # array_push($PART_NUMBER, $row[7]);
- # array_push($GROUP, $row[8]);
- # array_push($CHECK_OUT, $row[9]);
- # array_push($STATUS, $row[10]);
- # array_push($CHECK_IN, $row[11]);
+# array_push($ids, $row[0]);
+# array_push($student_number, $row[1]);
+# array_push($first_name, $row[2]);
+# array_push($last_name, $row[3]);
+# array_push($ITR, $row[4]);
+# array_push($Serial, $row[5]);
+# array_push($mac, $row[6]);
+# array_push($PART_NUMBER, $row[7]);
+# array_push($GROUP, $row[8]);
+# array_push($CHECK_OUT, $row[9]);
+# array_push($STATUS, $row[10]);
+# array_push($CHECK_IN, $row[11]);
 # }
 
 #Variables that are kept for data purposes
 $CHECK_OUT_TIME;
 $CHECK_IN_TIME;
-
+$TRACKER;
 
 #Connects to the sql server
 $servername = "127.0.0.1";
@@ -62,7 +62,7 @@ function loaner_charger($id, $barcode) {
   $sql = "UPDATE loaner_chargers SET Student_Number='$id' WHERE id='$barcode'";
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
-    }
+  }
 }
 
 
@@ -71,17 +71,17 @@ function loaner_chromebook($id, $barcode) {
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "UPDATE loaner_chromebooks SET Student_Number='$id' WHERE ITR='$barcode'";
- # $sql = "INSERT INTO loaner_chromebooks (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+# $sql = "INSERT INTO loaner_chromebooks (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
-    }
+  }
 }
 
 function loaner_cb_log($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
-  $sql = "INSERT INTO chromebook_log (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+  $sql = "INSERT INTO chromebook_log (Student_Number, ITR) VALUES ('$id', '$barcode')";
   if ($conn->query($sql) === TRUE) {
     echo "New record is correctly added";
   }
@@ -104,16 +104,16 @@ function print_av_cb() {
 function set_check_out_back_to_null_cb(){
   global $conn;
   global $CHECK_OUT_TIME;
-  $sql = "UPDATE loaner_chromebooks SET Check_out=NULL AND Student_Number=NULL WHERE Check_in IS NOT NULL";
+  $sql = "UPDATE loaner_chromebooks SET Check_out=NULL AND Student_Number=NULL WHERE Checked_in IS NOT NULL";
   $conn->query($sql);
 }
 
 function add_check_out_time_cb($barcode) {
- global $conn;
- global $CHECK_OUT_TIME;
- $CHECK_OUT_TIME = date("Y-m-d h:i:s");
- $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
- $conn->query($sql);
+  global $conn;
+  global $CHECK_OUT_TIME;
+  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+  $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
+  $conn->query($sql);
 }
 
 #print the chargers that are ready for loan
@@ -129,7 +129,7 @@ function print_av_chargers() {
       echo  $row['id'] ;
     }
   }
- } 
+} 
 
 function set_check_out_back_to_null_c(){
   global $conn;
@@ -139,11 +139,11 @@ function set_check_out_back_to_null_c(){
 }
 
 function add_check_out_time_c($barcode) {
- global $conn;
- global $CHECK_OUT_TIME;
- $CHECK_OUT_TIME = date("Y-m-d h:i:s");
- $sql = "UPDATE loaner_chargers SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
- $conn->query($sql);
+  global $conn;
+  global $CHECK_OUT_TIME;
+  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+  $sql = "UPDATE loaner_chargers SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
+  $conn->query($sql);
 }
 
 
@@ -196,7 +196,6 @@ function update_check_in_time_in_cb_log($id, $barcode) {
 #    $field1name = $row["AutoID"];
 #    echo '<b>'.$field1name . '<br />';
 #  }
-  /*freeresultset*/
 #  $result->free();
 #}
 
@@ -209,65 +208,65 @@ function update_check_in_time_in_cb_log($id, $barcode) {
 #$last_AutoID = (int)end($ids);
 #$today = date("d/m/Y");
 
- # function loaner_chromebook($id, $barcode) {
-  #  $last_AutoID = $last_AutoID + 1;
-  #  array_push($ids, $last_AutoID);
-  #  array_push($student_number, $id);
-  #  array_push($CHECK_OUT,$today);
+# function loaner_chromebook($id, $barcode) {
+#  $last_AutoID = $last_AutoID + 1;
+#  array_push($ids, $last_AutoID);
+#  array_push($student_number, $id);
+#  array_push($CHECK_OUT,$today);
 #  }
 
 #  function loaner_charger($id, $bardcode) {
- #   global $last_AutoID;
- #   global $student_number;
- #   $last_AutoID = $last_AutoID + 1;
- #   array_push($student_number, $id);
- #   array_push($ITR, $barcode);
- #   array_push($ids, $last_AutoID);
- #   array_push($CHECK_OUT,$today); 
-  #}
+#   global $last_AutoID;
+#   global $student_number;
+#   $last_AutoID = $last_AutoID + 1;
+#   array_push($student_number, $id);
+#   array_push($ITR, $barcode);
+#   array_push($ids, $last_AutoID);
+#   array_push($CHECK_OUT,$today); 
+#}
 
- # function loaner_both($id, $device_barcode, $charger_barcode) {
- #   array_push($student_number, $id);
- #   $last_AutoID = $last_AutoID + 1;
- #   array_push($ids, $last_AutoID);
- #   $last_AutoID = $last_AutoID + 1;
- #   array_push($ids, $last_AutoID);
- #   array_push($CHECK_OUT,$today);
- # }
+# function loaner_both($id, $device_barcode, $charger_barcode) {
+#   array_push($student_number, $id);
+#   $last_AutoID = $last_AutoID + 1;
+#   array_push($ids, $last_AutoID);
+#   $last_AutoID = $last_AutoID + 1;
+#   array_push($ids, $last_AutoID);
+#   array_push($CHECK_OUT,$today);
+# }
 
 #  function add_av_cb($barcode) {
- #   array_push($CB_AV, $barcode);
- # }
- 
- # function add_av_c($barcode) {
- #   array_push($barcode);
- # }
+#   array_push($CB_AV, $barcode);
+# }
+
+# function add_av_c($barcode) {
+#   array_push($barcode);
+# }
 
 
- # function av_loaner($barcode) {
- #   if (in_array($barcode, $CB_AV)) {
-  #    print("This chromebook is good to go!");  
-  #  }
- # }
-  
- # function av_charger_device($barcode_d, $barcode_c){
- #   echo "Devices that are currently ready to use";
- #   print_r($barcode_d);
- #   echo "Chargers that are currently ready to use";
- #   print_r($barcode_c);
- # }
-  
- # function print_av() {
- #   global $CB_AV;
- #   foreach($CB_AV as $key) {
- #     echo $key;
- #   }
- # }  
+# function av_loaner($barcode) {
+#   if (in_array($barcode, $CB_AV)) {
+#    print("This chromebook is good to go!");  
+#  }
+# }
 
- # print((int)end($ids));
- # print("\n");
- # print(count($ids));
+# function av_charger_device($barcode_d, $barcode_c){
+#   echo "Devices that are currently ready to use";
+#   print_r($barcode_d);
+#   echo "Chargers that are currently ready to use";
+#   print_r($barcode_c);
+# }
 
- 
+# function print_av() {
+#   global $CB_AV;
+#   foreach($CB_AV as $key) {
+#     echo $key;
+#   }
+# }  
+
+# print((int)end($ids));
+# print("\n");
+# print(count($ids));
+
+
 ?>
 

@@ -70,13 +70,23 @@ function loaner_chromebook($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
-  $sql = "INSERT INTO cbdata (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+  $sql = "UPDATE loaner_chromebooks SET Student_Number='$id' WHERE ITR='$barcode'";
+ # $sql = "INSERT INTO loaner_chromebooks (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
     }
 }
 
-#https://www.codegrepper.com/code-examples/php/php+print+table+from+mysql
+function loaner_cb_log($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "INSERT INTO chromebook_log (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
+  if ($conn->query($sql) === TRUE) {
+    echo "New record is correctly added";
+  }
+}
+
 #prints the chromebooks that are ready for loan
 function print_av_cb() {
   global $conn;
@@ -102,7 +112,7 @@ function add_check_out_time_cb($barcode) {
  global $conn;
  global $CHECK_OUT_TIME;
  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
- $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
+ $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
  $conn->query($sql);
 }
 
@@ -150,7 +160,7 @@ function add_check_out_time_c($barcode) {
 function return_charger($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
-  $CHECK_IN_TIME = date('Y-m-d h:i:s');
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
   $q = "UPDATE loaner_chargers SET Check_in='$CHECK_IN_TIME' WHERE id='$barcode' AND Student_Number='$id'";
   $conn->query($q);
   echo "Updated Charger return";
@@ -159,11 +169,23 @@ function return_charger($id, $barcode) {
 function return_chromebook($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
-  $CHECK_IN_TIME = date('Y-m-d h:i:s');
-  $q = "UPDATE loaner_chromebooks SET Check_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $q = "UPDATE loaner_chromebooks SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
   $conn->query($q);
   echo "Updated chromebook return";
 }
+
+function update_check_in_time_in_cb_log($id, $barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $q = "UPDATE chromebook_log SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $conn->query($q);
+  echo "Updated chromebook log";
+
+}
+
+
 #Spits out the data from the row AutoID but that can be any row an etc.
 #$z = "SELECT * FROM cbdata";
 #echo "<b> <center>Database Output</center> </b> <br> <br>";

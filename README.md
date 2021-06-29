@@ -2,7 +2,7 @@
 
 ## PHP Client for Chromebook Loaners
 
-### Little PHP and mySQL project while learning from scratch
+### Little PHP and mySQL project while learning from scratch that took a short amount of time with a million distractions so yes some of the code is sketchy but will make better soon.
 
 ## Overview:
 This is a quickly made project to track students on who, what, when checked out a device such as a laptop or charger and if they returned it back in or not.

@@ -1,4 +1,4 @@
-# PHP_CB
+# LoanerTracking
 
 ## PHP Client for Chromebook Loaners
 

@@ -64,6 +64,7 @@ function loaner_charger($id, $barcode) {
   global $conn;
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "UPDATE loaner_chargers SET Student_Number='$id' WHERE id='$barcode'";
+  echo $sql;
   if ($conn->query($sql) === true) {
     echo "New record is correctly created";
   }

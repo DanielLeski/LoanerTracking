@@ -16,3 +16,4 @@ This uses mySQL to track information into a database but the commented code with
 - Implement mySQL triggers
   - This will make logging changes into a table that is meant for logs a little nicer in my opinion instead of writing another method ffor INSERT
 - Send emails to the students after a specific amount of time after check out
+- Rework the front-end to make it seem a little nicer

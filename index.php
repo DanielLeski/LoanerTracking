@@ -14,20 +14,78 @@
    $checkin_status = 'unchecked';
    $checkout_status = 'unchecked';
 
-   if (isset($_POST['Submit'])):
+   if (isset($_POST['Submit'])) {
     $selected_radio = $_POST['c'];
     if ($selected_radio == 'checkout') {
+       if (isset($_POST['Chromebook_Barcode']) && $_POST['Chromebook_Barcode'] === "") {
         $checkout_status = 'checked';
         $id = $_POST['name'];
         $br = $_POST['Charger_Barcode'];
-        loaner_charger($id, $br); 
-    } elseif ($selected_radio == 'checkin') {
+        loaner_charger($id, $br);
+        add_check_out_time_c($br);
+    } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") { 
         $checkin_status = 'checked';
         $id = $_POST['name'];
         $br = $_POST['Chromebook_Barcode'];
+        find_duplicates_in_table($br);
         loaner_chromebook($id, $br);
+        loaner_chromebook_cart1($id, $br);
+        loaner_chromebook_cart2($id, $br);
+        loaner_chromebook_cart3($id, $br);
+        loaner_chromebook_cart4($id, $br);
+        add_check_out_time_cb($br);
+        loaner_cb_log($id, $br);
+    } else {
+        $checkout_status = 'checked';
+        $id = $_POST['name'];
+        $brc = $_POST['Chromebook_Barcode'];
+        $brcc = $_POST['Charger_Barcode'];
+        loaner_charger($id,$brcc);
+        add_check_out_time_c($br);
+        loaner_chromebook($id, $br);
+        loaner_chromebook_cart1($id, $br);
+        loaner_chromebook_cart2($id, $br);
+        loaner_chromebook_cart3($id, $br);
+        loaner_chromebook_cart4($id, $br);
+        add_check_out_time_cb($br);
+        loaner_cb_log($id, $br);
     }
-   endif;
+
+   } elseif ($selected_radio == 'checkin') {
+       if (isset($_POST['Chromebook_Barcode']) && $_POST['Chromebook_Barcode'] === "") {
+      $checkin_status = 'checked';
+      $id = $_POST['name'];
+      $br = $_POST['Charger_Barcode'];
+      return_charger($id, $br);
+      set_check_out_back_to_null_c();
+  } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") { 
+      $checkin_status = 'checked';
+      $id = $_POST['name'];
+      $br = $_POST['Chromebook_Barcode'];
+      return_chromebook($id, $br);
+      add_checkin_to_cb1($br);
+      add_checkin_to_cb2($br);
+      add_checkin_to_cb3($br);
+      add_checkin_to_cb4($br);
+      set_check_out_back_to_null_cb();
+      update_check_in_time_in_cb_log($id,$br);
+      }
+    } else {
+        $checkin_status = 'checked';
+        $id = $_POST['name'];
+        $brc = $_POST['Chromebook_Barcode'];
+        $brcc = $_POST['Charger_Barcode'];
+        return_charger($id,$brcc);
+        set_check_out_back_to_null_c();
+        return_chromebook($id, $br);
+        add_checkin_to_cb1($br);
+        add_checkin_to_cb2($br);
+        add_checkin_to_cb3($br);
+        add_checkin_to_cb4($br);
+        set_check_out_back_to_null_cb();
+        update_check_in_time_in_cb_log($id, $brc);
+    }
+   }
 ?>
 
 <div class="con">
@@ -59,6 +117,39 @@
 <input type="submit" class="Button" name="Submit" value="Submit"/>
 </form>
 </head>
+
+
+<br>
+<br>
+<br>
+
+
+<div style="width:400px; margin: auto;">
+<table style="float: left">
+<tr>
+<td><?php print_cb_carts_random_c1(); ?></td>
+</tr>
+</table>
+<table style="float: left">
+<tr>
+<td><?php print_cb_carts_random_c2(); ?></td>
+</tr>
+</table>
+<table style="float: left">
+<tr>
+<td><?php print_cb_carts_random_c3(); ?></td>
+</tr>
+</table>
+<table style="float: left">
+<tr>
+<td><?php print_cb_carts_random_c4(); ?></td>
+</tr>
+</table>
+</div>
+
+
+
+
 
 <style>
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300italic,500);
@@ -182,7 +273,15 @@ clear: both;
 width: 50%;
 clear: both;
 }
+.tableClass td{
+  text-align: center;
+}
 
+td {
+  text-align: right;
+}
 </style>
-</html>
 
+<meta http-equiv="refresh" content="30">
+
+</html>

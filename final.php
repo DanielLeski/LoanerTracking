@@ -1,39 +1,4 @@
 <?php
-#$ids = array();
-#$student_number = array();
-#$first_name = array();
-#$last_name = array();
-#$ITR = array();
-#$Serial = array();
-#$mac = array();
-#$PART_NUMBER = array();
-#$GROUP = array();
-#$CHECK_OUT = array();
-#$STATUS = array();
-#$CHECK_IN = array();
-#$device_barcode = 0;
-#$charger_barcode = 0;
-#$chargers = array();
-#$CB_AV = array(1,1,1,1,1);
-
-
-#reading the file and getting the information to each array
-#$file = fopen('Table.Loaner.csv', 'r');
-#$append_file = fopen('Table.Loaner.csv', 'a');
-#while (($row = fgetcsv($file, 0, ',')) != FALSE) {
-# array_push($ids, $row[0]);
-# array_push($student_number, $row[1]);
-# array_push($first_name, $row[2]);
-# array_push($last_name, $row[3]);
-# array_push($ITR, $row[4]);
-# array_push($Serial, $row[5]);
-# array_push($mac, $row[6]);
-# array_push($PART_NUMBER, $row[7]);
-# array_push($GROUP, $row[8]);
-# array_push($CHECK_OUT, $row[9]);
-# array_push($STATUS, $row[10]);
-# array_push($CHECK_IN, $row[11]);
-# }
 
 #Variables that are kept for data purposes
 $CHECK_OUT_TIME;
@@ -115,18 +80,6 @@ function loaner_chromebook_cart4($id, $barcode) {
 }
 
 
-function loaner_chromebook_cart1_display($id, $barcode) {
-  
-}
-
-function loaner_chromebook_cart1_display($id, $barcode) {
-
-}
-
-function loaner_chromebook_cart1_display($id, $barcode) {
-
-}
-
 function loaner_cb_log($id, $barcode) {
   global $CHECK_OUT_TIME;
   global $conn;
@@ -138,11 +91,88 @@ function loaner_cb_log($id, $barcode) {
 }
 
 #Randomize slots for the computer carts so that the wear and tear is equally distributed
-function print_cb_carts_random() {
+function print_cb_carts_random_c1() {
   global $conn;
-    
+  $sql = "SELECT Cart FROM cbcart1 WHERE Check_out IS NULL ORDER BY RAND()";
+  $result = mysqli_query($conn, $sql);
+  echo "<table border='1'>
+        <tr>
+        <th> CB CART 1: </th>
+        </tr>";
+  $row = 0;
+  do {
+    $rows = mysqli_fetch_array($result);
+    echo "<tr>";
+    echo "<td>" . $rows['Cart'] . "</td>";
+    echo "</tr>";
+    $row = $row + 1;
+  } while ($row <= 10);
+ echo "</table>";
+}
+
+#Randomize slots for the computer carts so that the wear and tear is equally distributed
+function print_cb_carts_random_c2() {
+  global $conn;
+  $sql = "SELECT Cart FROM cbcart2 WHERE Check_out IS NULL ORDER BY RAND()";
+  $result = mysqli_query($conn, $sql);
+    echo "<table border='1'>
+        <tr>
+        <th> CB Cart 2: </th>
+        </tr>";
+  $row = 0;
+  do {
+    $rows = mysqli_fetch_array($result);
+    echo "<tr>";
+    echo "<td>" . $rows['Cart'] . "</td>";
+    echo "</tr>";
+    $row = $row + 1;
+  } while ($row <= 10);
+ echo "</table>";
+ 
+}
+
+#Randomize slots for the computer carts so that the wear and tear is equally distributed
+function print_cb_carts_random_c3() {
+  global $conn;
+  $sql = "SELECT Cart FROM cbcart3 WHERE Check_out IS NULL ORDER BY RAND()";
+  $result = mysqli_query($conn, $sql);
+  echo "<table border='1'>
+      <tr>
+      <th> CB Cart 3: </th>
+      </tr>";
+  $row = 0;
+  do {
+    $rows = mysqli_fetch_array($result);
+    echo "<tr>";
+    echo "<td>" . $rows['Cart'] . "</td>";
+    echo "</tr>";
+    $row = $row + 1;
+  } while ($row <= 10);
+    echo "</table>";
+}
+
+#Randomize slots for the computer carts so that the wear and tear is equally distributed
+function print_cb_carts_random_c4() {
+  global $conn;
+  $sql = "SELECT Cart FROM cbcart4 WHERE Check_out IS NULL ORDER BY RAND()";
+  $result = mysqli_query($conn, $sql);
+  echo "<table border='1'>
+      <tr>
+      <th> CB Cart 4: </th>
+      </tr>";
+  $row = 0;
+  do {
+    $rows = mysqli_fetch_array($result);
+    echo "<tr>";
+    echo "<td>" . $rows['Cart'] . "</td>";
+    echo "</tr>";
+    $row = $row + 1;
+  } while ($row <= 10);
+    echo "</table>";
 
 }
+
+
 
 
 
@@ -257,89 +287,33 @@ function add_checkin_to_cb1($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $q = "UPDATE "
+  $sql = "UPDATE cbcart1 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);  
 }
 
-#Spits out the data from the row AutoID but that can be any row an etc.
-#$z = "SELECT * FROM cbdata";
-#echo "<b> <center>Database Output</center> </b> <br> <br>";
+function add_checkin_to_cb2($barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart2 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
 
-#if ($result = $conn->query($z)) {
+function add_checkin_to_cb3($barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart3 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
 
-#  while ($row = $result->fetch_assoc()) {
-#    $field1name = $row["AutoID"];
-#    echo '<b>'.$field1name . '<br />';
-#  }
-#  $result->free();
-#}
-
-
-
-#$loan = readline("Do you want to loan a (Pick a number)\n1.Charger\n2.Chromebook\n3.Both\n");
-#$loan = (int)$loan;
-
-#Current autoID number
-#$last_AutoID = (int)end($ids);
-#$today = date("d/m/Y");
-
-# function loaner_chromebook($id, $barcode) {
-#  $last_AutoID = $last_AutoID + 1;
-#  array_push($ids, $last_AutoID);
-#  array_push($student_number, $id);
-#  array_push($CHECK_OUT,$today);
-#  }
-
-#  function loaner_charger($id, $bardcode) {
-#   global $last_AutoID;
-#   global $student_number;
-#   $last_AutoID = $last_AutoID + 1;
-#   array_push($student_number, $id);
-#   array_push($ITR, $barcode);
-#   array_push($ids, $last_AutoID);
-#   array_push($CHECK_OUT,$today); 
-#}
-
-# function loaner_both($id, $device_barcode, $charger_barcode) {
-#   array_push($student_number, $id);
-#   $last_AutoID = $last_AutoID + 1;
-#   array_push($ids, $last_AutoID);
-#   $last_AutoID = $last_AutoID + 1;
-#   array_push($ids, $last_AutoID);
-#   array_push($CHECK_OUT,$today);
-# }
-
-#  function add_av_cb($barcode) {
-#   array_push($CB_AV, $barcode);
-# }
-
-# function add_av_c($barcode) {
-#   array_push($barcode);
-# }
-
-
-# function av_loaner($barcode) {
-#   if (in_array($barcode, $CB_AV)) {
-#    print("This chromebook is good to go!");  
-#  }
-# }
-
-# function av_charger_device($barcode_d, $barcode_c){
-#   echo "Devices that are currently ready to use";
-#   print_r($barcode_d);
-#   echo "Chargers that are currently ready to use";
-#   print_r($barcode_c);
-# }
-
-# function print_av() {
-#   global $CB_AV;
-#   foreach($CB_AV as $key) {
-#     echo $key;
-#   }
-# }  
-
-# print((int)end($ids));
-# print("\n");
-# print(count($ids));
+function add_checkin_to_cb4($barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart4 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
 
 
 ?>

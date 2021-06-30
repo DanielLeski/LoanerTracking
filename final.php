@@ -3,7 +3,6 @@
 #Variables that are kept for data purposes
 $CHECK_OUT_TIME;
 $CHECK_IN_TIME;
-$TRACKER;
 
 #Connects to the sql server
 $servername = "127.0.0.1";
@@ -11,10 +10,6 @@ $username = "root";
 $password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
-
-
-#button
-# https://stackoverflow.com/questions/35716873/how-to-check-if-the-button-tag-is-clicked-in-php
 
 #
 # These functions are made for checking out either a chromebook or a charger 
@@ -172,32 +167,14 @@ function print_cb_carts_random_c4() {
 
 }
 
-
-
-
-
 #Finding duplicates within the main chromebook_lonaer database
-function find_duplicates_in_table($id) {
-  global $conn;
-  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
-  if ($conn->query($sql) == TRUE) {
-    echo "found duplicate";
-  }
-}
-
-#prints the chromebooks that are ready for loan
-function print_av_cb() {
-  global $conn;
-  global $CHECK_IN_TIME;
-  $CHECK_OUT_TIME = date('Y-m-d h:i:s');
-  $sql = "SELECT * FROM loaner_chromebooks WHERE Check_out is NULL";
-  $r = $conn->query($sql);
-  if ($r->num_rows > 0) {
-    while($row = $r->fetch_assoc()) {
-      //echo "\n" . $row['ITR'] . "\n";
-    }
-  }
-}
+#function find_duplicates_in_table($id) {
+#  global $conn;
+#  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
+#  if ($conn->query($sql) == TRUE) {
+#    echo "found duplicate";
+#  }
+#}
 
 function set_check_out_back_to_null_cb(){
   global $conn;
@@ -213,21 +190,6 @@ function add_check_out_time_cb($barcode) {
   $sql = "UPDATE loaner_chromebooks SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
   $conn->query($sql);
 }
-
-#print the chargers that are ready for loan
-function print_av_chargers() {
-  global $conn;
-  global $CHECK_OUT_TIME;
-  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
-  $sql = "SELECT * FROM loaner_chargers WHERE Check_out IS NULL";
-  $r = $conn->query($sql);
-  if ($r->num_rows > 0) {
-    while($row = $r->fetch_assoc()) {
-      //echo "\n";
-      //echo  $row['id'] ;
-    }
-  }
-} 
 
 function set_check_out_back_to_null_c(){
   global $conn;
@@ -254,7 +216,6 @@ function add_check_out_time_c($barcode) {
 
 # Added the Check in time when found
 
-#https://www.techonthenet.com/sql/and_or.php
 function return_charger($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
@@ -283,14 +244,6 @@ function update_check_in_time_in_cb_log($id, $barcode) {
 
 }
 
-function add_checkin_to_cb1($barcode) {
-  global $conn;
-  global $CHECK_IN_TIME;
-  $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $sql = "UPDATE cbcart1 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
-  $conn->query($sql);  
-}
-
 function add_checkin_to_cb2($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
@@ -315,6 +268,11 @@ function add_checkin_to_cb4($barcode) {
   $conn->query($sql);
 }
 
+function event_to_let_chromebooks_charge() {
+  global $conn;
+  $sql = "CREATE EVENT daily_reset ON SCHEDULE 10 HOUR DO UPDATE cbcart1, cbcart2, cbcart3, cbcart4 SET Check_in=NULL, Check_out=NULL Student_Number=NULL WHERE Check_in IS NOT NULL AND Check_out IS NOT NULL";
+  $conn->query($sql);
+ }
 
 ?>
 

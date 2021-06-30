@@ -66,7 +66,7 @@ function loaner_charger($id, $barcode) {
   $sql = "UPDATE loaner_chargers SET Student_Number='$id' WHERE id='$barcode'";
   echo $sql;
   if ($conn->query($sql) === true) {
-    echo "New record is correctly created";
+    //echo "New record is correctly created";
   }
 }
 
@@ -77,9 +77,54 @@ function loaner_chromebook($id, $barcode) {
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "UPDATE loaner_chromebooks SET Student_Number='$id' WHERE ITR='$barcode'";
 # $sql = "INSERT INTO loaner_chromebooks (Student_Number, ITR, Check_out) VALUES ('$id', '$barcode', '$CHECK_OUT_TIME')";
-  if ($conn->query($sql) === true) {
-    echo "New record is correctly created";
+  if ($conn->query($sql) === TRUE) {
+    //echo "New record is correctly created";
   }
+}
+
+function loaner_chromebook_cart1($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart1 SET Student_Number='$id', Check_out='$CHECK_OUT_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+function loaner_chromebook_cart2($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart2 SET Student_Number='$id', Check_out='$CHECK_OUT_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+function loaner_chromebook_cart3($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart3 SET Student_Number='$id',  Check_out='$CHECK_OUT_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+function loaner_chromebook_cart4($id, $barcode) {
+  global $CHECK_OUT_TIME;
+  global $conn;
+  $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart4 SET Student_Number='$id',  Check_out='$CHECK_OUT_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+
+function loaner_chromebook_cart1_display($id, $barcode) {
+  
+}
+
+function loaner_chromebook_cart1_display($id, $barcode) {
+
+}
+
+function loaner_chromebook_cart1_display($id, $barcode) {
+
 }
 
 function loaner_cb_log($id, $barcode) {
@@ -88,7 +133,25 @@ function loaner_cb_log($id, $barcode) {
   $CHECK_OUT_TIME = date('Y-m-d H:i:s');
   $sql = "INSERT INTO chromebook_log (Student_Number, ITR) VALUES ('$id', '$barcode')";
   if ($conn->query($sql) === TRUE) {
-    echo "New record is correctly added";
+    //echo "New record is correctly added";
+  }
+}
+
+#Randomize slots for the computer carts so that the wear and tear is equally distributed
+function print_cb_carts_random() {
+  global $conn;
+    
+
+}
+
+
+
+#Finding duplicates within the main chromebook_lonaer database
+function find_duplicates_in_table($id) {
+  global $conn;
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
+  if ($conn->query($sql) == TRUE) {
+    echo "found duplicate";
   }
 }
 
@@ -101,7 +164,7 @@ function print_av_cb() {
   $r = $conn->query($sql);
   if ($r->num_rows > 0) {
     while($row = $r->fetch_assoc()) {
-      echo "\n" . $row['ITR'] . "\n";
+      //echo "\n" . $row['ITR'] . "\n";
     }
   }
 }
@@ -130,8 +193,8 @@ function print_av_chargers() {
   $r = $conn->query($sql);
   if ($r->num_rows > 0) {
     while($row = $r->fetch_assoc()) {
-      echo "\n";
-      echo  $row['id'] ;
+      //echo "\n";
+      //echo  $row['id'] ;
     }
   }
 } 
@@ -168,7 +231,7 @@ function return_charger($id, $barcode) {
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
   $q = "UPDATE loaner_chargers SET Check_in='$CHECK_IN_TIME' WHERE id='$barcode' AND Student_Number='$id'";
   $conn->query($q);
-  echo "Updated Charger return";
+  //echo "Updated Charger return";
 }
 
 function return_chromebook($id, $barcode) {
@@ -177,7 +240,7 @@ function return_chromebook($id, $barcode) {
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
   $q = "UPDATE loaner_chromebooks SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
   $conn->query($q);
-  echo "Updated chromebook return";
+  //echo "Updated chromebook return";
 }
 
 function update_check_in_time_in_cb_log($id, $barcode) {
@@ -186,10 +249,16 @@ function update_check_in_time_in_cb_log($id, $barcode) {
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
   $q = "UPDATE chromebook_log SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
   $conn->query($q);
-  echo "Updated chromebook log";
+  //echo "Updated chromebook log";
 
 }
 
+function add_checkin_to_cb1($barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $q = "UPDATE "
+}
 
 #Spits out the data from the row AutoID but that can be any row an etc.
 #$z = "SELECT * FROM cbdata";

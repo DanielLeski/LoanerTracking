@@ -10,7 +10,6 @@
 
 
 <?php
-   #https://stackoverflow.com/questions/14747803/how-to-send-value-attribute-from-radio-button-in-php
    $checkin_status = 'unchecked';
    $checkout_status = 'unchecked';
 
@@ -148,6 +147,10 @@
 </div>
 
 
+<?php 
+event_to_let_chromebooks_charge();
+?>
+
 
 
 
@@ -282,6 +285,6 @@ td {
 }
 </style>
 
-<meta http-equiv="refresh" content="30">
+<meta http-equiv="refresh" content="120">
 
 </html>

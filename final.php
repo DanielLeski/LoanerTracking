@@ -279,7 +279,7 @@ function add_checkin_to_cb4($barcode) {
 
 function find_duplicates($id) {
   global $conn;
-  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1;";
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL GROUP BY Student_Number HAVING COUNT(Student_Number) > 1;";
   $conn->query($sql);
   echo "<br>";
   echo "FOUND DUPLICATE";

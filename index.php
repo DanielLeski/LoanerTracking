@@ -20,13 +20,13 @@
         $id = $_POST['name'];
         $br = $_POST['Charger_Barcode'];
         loaner_charger($id, $br);
-        //find_duplicates_chargers($id);
+        find_duplicates_chargers($id);
     } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") { 
         $checkout_status = 'checked';
         $id = $_POST['name'];
         $br = $_POST['Chromebook_Barcode'];
           if(find_duplicates($id) === TRUE) {
-            echo "dup found";
+            echo "Duplicate Entry found for this Student ID '$id' for a chromebook loaner";
             loaner_chromebook($id, $br);  
             loaner_chromebook_cart1($id, $br);
             loaner_chromebook_cart2($id, $br);
@@ -51,7 +51,7 @@
         $brc = $_POST['Chromebook_Barcode'];
         $brcc = $_POST['Charger_Barcode'];
         if(find_duplicates($id) === TRUE)  {
-          echo "A dup is found chromebook";
+          echo "Duplicate Entry found for this Student ID for a Chromebook Loaner '$id'";
           loaner_charger($id,$brcc);
           add_check_out_time_c($br);
           loaner_chromebook($id, $br);
@@ -63,7 +63,7 @@
           loaner_cb_log($id, $br);
           add_check_out_time_cb_log($br);
          } elseif(find_duplicate_chargers($id) === TRUE){
-          echo "charger dup found";
+          echo "Duplicate Entry found for this Student for a Charger '$id'";
           loaner_charger($id,$brcc);
           add_check_out_time_c($br);
          } else {

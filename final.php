@@ -244,11 +244,20 @@ function update_check_in_time_in_cb_log($id, $barcode) {
 
 }
 
+function add_checkin_to_cb1($barcode) {
+  global $conn;
+  global $CHECK_IN_TIME;
+  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $sql = "UPDATE cbcart1 SET Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+
 function add_checkin_to_cb2($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $sql = "UPDATE cbcart2 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $sql = "UPDATE cbcart2 SET Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
   $conn->query($sql);
 }
 
@@ -256,7 +265,7 @@ function add_checkin_to_cb3($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $sql = "UPDATE cbcart3 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $sql = "UPDATE cbcart3 SET Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
   $conn->query($sql);
 }
 
@@ -264,15 +273,18 @@ function add_checkin_to_cb4($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $sql = "UPDATE cbcart4 Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
+  $sql = "UPDATE cbcart4 SET Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
   $conn->query($sql);
 }
 
-function event_to_let_chromebooks_charge() {
+function find_duplicates($id) {
   global $conn;
-  $sql = "CREATE EVENT daily_reset ON SCHEDULE 10 HOUR DO UPDATE cbcart1, cbcart2, cbcart3, cbcart4 SET Check_in=NULL, Check_out=NULL Student_Number=NULL WHERE Check_in IS NOT NULL AND Check_out IS NOT NULL";
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1;";
   $conn->query($sql);
- }
+  echo "<br>";
+  echo "FOUND DUPLICATE";
+}
+
 
 ?>
 

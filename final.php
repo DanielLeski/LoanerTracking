@@ -191,6 +191,14 @@ function add_check_out_time_cb($barcode) {
   $conn->query($sql);
 }
 
+function add_check_out_time_cb_log($barcode) {
+  global $conn;
+  global $CHECK_OUT_TIME;
+  $CHECK_OUT_TIME = date("Y-m-d h:i:s");
+  $sql = "UPDATE chromebook_log SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
 function set_check_out_back_to_null_c(){
   global $conn;
   global $CHECK_OUT_TIME;
@@ -229,7 +237,7 @@ function return_chromebook($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $q = "UPDATE loaner_chromebooks SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $q = "UPDATE loaner_chromebooks SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode'";
   $conn->query($q);
   //echo "Updated chromebook return";
 }
@@ -238,7 +246,7 @@ function update_check_in_time_in_cb_log($id, $barcode) {
   global $conn;
   global $CHECK_IN_TIME;
   $CHECK_IN_TIME = date('Y-m-d H:i:s');
-  $q = "UPDATE chromebook_log SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode' AND Student_Number='$id'";
+  $q = "UPDATE chromebook_log SET Checked_in='$CHECK_IN_TIME' WHERE ITR='$barcode'";
   $conn->query($q);
   //echo "Updated chromebook log";
 
@@ -279,12 +287,18 @@ function add_checkin_to_cb4($barcode) {
 
 function find_duplicates($id) {
   global $conn;
-  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL GROUP BY Student_Number HAVING COUNT(Student_Number) > 1;";
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL AND Student_Number IS NOT '' GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
   $conn->query($sql);
   echo "<br>";
-  echo "FOUND DUPLICATE";
+  echo "FOUND DUPLICATE - STUDENT ALREADY HAS A CHROMEBOOK LOANED";
+ }
+
+function find_duplicate_chargers($id) {
+  global $conn;
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL AND Student_Number IS NOT '' GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
+  $conn->query($sql);
+  echo "<br>";
+  echo "FOUND DUPLICATE - STUDENT ALREADY HAS A CHARGER LOANED";
 }
 
-
 ?>
-

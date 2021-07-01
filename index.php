@@ -23,11 +23,11 @@
         loaner_charger($id, $br);
         add_check_out_time_c($br);
     } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") { 
-        $checkin_status = 'checked';
+        $checkout_status = 'checked';
         $id = $_POST['name'];
         $br = $_POST['Chromebook_Barcode'];
-        find_duplicates_in_table($br);
         loaner_chromebook($id, $br);
+        find_duplicates($id);
         loaner_chromebook_cart1($id, $br);
         loaner_chromebook_cart2($id, $br);
         loaner_chromebook_cart3($id, $br);
@@ -39,6 +39,7 @@
         $id = $_POST['name'];
         $brc = $_POST['Chromebook_Barcode'];
         $brcc = $_POST['Charger_Barcode'];
+        find_duplicates($id);
         loaner_charger($id,$brcc);
         add_check_out_time_c($br);
         loaner_chromebook($id, $br);
@@ -146,10 +147,6 @@
 </table>
 </div>
 
-
-<?php 
-event_to_let_chromebooks_charge();
-?>
 
 
 
@@ -285,6 +282,6 @@ td {
 }
 </style>
 
-<meta http-equiv="refresh" content="120">
+<meta http-equiv="refresh" content="3600">
 
 </html>

@@ -92,7 +92,7 @@ function print_cb_carts_random_c1() {
   $result = mysqli_query($conn, $sql);
   echo "<table border='1'>
         <tr>
-        <th> CB CART 1: </th>
+        <th> CB Cart 1: </th>
         </tr>";
   $row = 0;
   do {
@@ -287,18 +287,20 @@ function add_checkin_to_cb4($barcode) {
 
 function find_duplicates($id) {
   global $conn;
-  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL AND Student_Number IS NOT '' GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
-  $conn->query($sql);
-  echo "<br>";
-  echo "FOUND DUPLICATE - STUDENT ALREADY HAS A CHROMEBOOK LOANED";
- }
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL AND Student_Number='$id' GROUP BY Student_Number HAVING COUNT(Student_Number) >= 1";
+  echo $sql;
+  while ($ar = mysqli_fetch_array(mysqli_query($conn, $sql))) {
+    return true;
+  }
+    return false;
+}
 
 function find_duplicate_chargers($id) {
   global $conn;
-  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks WHERE Student_Number IS NOT NULL AND Student_Number IS NOT '' GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
-  $conn->query($sql);
-  echo "<br>";
-  echo "FOUND DUPLICATE - STUDENT ALREADY HAS A CHARGER LOANED";
-}
-
+  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chargers WHERE Student_Number IS NOT NULL AND Student_Number='$id' GROUP BY Student_Number HAVING COUNT(Student_Number) >= 1";
+  while($ar = mysqli_fetch_array(mysqli_query($conn, $sql))) {
+    return true;
+  }
+  return false;
+  }
 ?>

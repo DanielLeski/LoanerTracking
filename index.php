@@ -8,7 +8,6 @@
 <br>
 </div>
 
-
 <?php
    $checkin_status = 'unchecked';
    $checkout_status = 'unchecked';
@@ -21,35 +20,65 @@
         $id = $_POST['name'];
         $br = $_POST['Charger_Barcode'];
         loaner_charger($id, $br);
-        add_check_out_time_c($br);
+        //find_duplicates_chargers($id);
     } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") { 
         $checkout_status = 'checked';
         $id = $_POST['name'];
         $br = $_POST['Chromebook_Barcode'];
-        loaner_chromebook($id, $br);
-        find_duplicates($id);
-        loaner_chromebook_cart1($id, $br);
-        loaner_chromebook_cart2($id, $br);
-        loaner_chromebook_cart3($id, $br);
-        loaner_chromebook_cart4($id, $br);
-        add_check_out_time_cb($br);
-        loaner_cb_log($id, $br);
+          if(find_duplicates($id) === TRUE) {
+            echo "dup found";
+            loaner_chromebook($id, $br);  
+            loaner_chromebook_cart1($id, $br);
+            loaner_chromebook_cart2($id, $br);
+            loaner_chromebook_cart3($id, $br);
+            loaner_chromebook_cart4($id, $br);
+            add_check_out_time_cb($br);
+            loaner_cb_log($id, $br);
+            add_check_out_time_cb_log($br);
+          } else {
+            loaner_chromebook($id, $br);  
+            loaner_chromebook_cart1($id, $br);
+            loaner_chromebook_cart2($id, $br);
+            loaner_chromebook_cart3($id, $br);
+            loaner_chromebook_cart4($id, $br);
+            add_check_out_time_cb($br);
+            loaner_cb_log($id, $br);
+            add_check_out_time_cb_log($br);
+          }  
     } else {
         $checkout_status = 'checked';
         $id = $_POST['name'];
         $brc = $_POST['Chromebook_Barcode'];
         $brcc = $_POST['Charger_Barcode'];
-        find_duplicates($id);
-        loaner_charger($id,$brcc);
-        add_check_out_time_c($br);
-        loaner_chromebook($id, $br);
-        loaner_chromebook_cart1($id, $br);
-        loaner_chromebook_cart2($id, $br);
-        loaner_chromebook_cart3($id, $br);
-        loaner_chromebook_cart4($id, $br);
-        add_check_out_time_cb($br);
-        loaner_cb_log($id, $br);
-    }
+        if(find_duplicates($id) === TRUE)  {
+          echo "A dup is found chromebook";
+          loaner_charger($id,$brcc);
+          add_check_out_time_c($br);
+          loaner_chromebook($id, $br);
+          loaner_chromebook_cart1($id, $br);
+          loaner_chromebook_cart2($id, $br);
+          loaner_chromebook_cart3($id, $br);
+          loaner_chromebook_cart4($id, $br);
+          add_check_out_time_cb($br);
+          loaner_cb_log($id, $br);
+          add_check_out_time_cb_log($br);
+         } elseif(find_duplicate_chargers($id) === TRUE){
+          echo "charger dup found";
+          loaner_charger($id,$brcc);
+          add_check_out_time_c($br);
+         } else {
+           loaner_charger($id,$brcc);
+           add_check_out_time_c($br);
+           loaner_chromebook($id, $br);
+           loaner_chromebook_cart1($id, $br);
+           loaner_chromebook_cart2($id, $br);
+           loaner_chromebook_cart3($id, $br);
+           loaner_chromebook_cart4($id, $br);
+           add_check_out_time_cb($br);
+           loaner_cb_log($id, $br);
+           add_check_out_time_cb_log($br);
+         }
+        }
 
    } elseif ($selected_radio == 'checkin') {
        if (isset($_POST['Chromebook_Barcode']) && $_POST['Chromebook_Barcode'] === "") {
@@ -146,7 +175,6 @@
 </tr>
 </table>
 </div>
-
 
 
 

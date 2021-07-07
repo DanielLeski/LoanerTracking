@@ -6,3 +6,5 @@
 *.db
 *.numbers
 *.xlsx
+*.sql
+db

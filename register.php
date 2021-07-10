@@ -1,5 +1,5 @@
 <?php
- include_once('/Users/smol/fun/PHP_CB/login.php');
+include_once('/Users/smol/fun/PHP_CB/login.php');
  $servername = "127.0.0.1";
  $username = "root";
  $password = "pk1212";
@@ -22,7 +22,7 @@
 
  #fix format
  function adding_user($user, $pass, $role) {
-  global $co1nn;
+  global $conn;
   $GLOBALS['password'] = password_hash($pass,  PASSWORD_DEFAULT);
   #$$pass = $GLOBALS['password'];
   $sql = "INSERT INTO users (username, password, role) VALUES ('$user', '$pass', '$role')";

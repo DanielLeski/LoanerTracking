@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 #Variables that are kept for data purposes
 $CHECK_OUT_TIME;
 $CHECK_IN_TIME;
@@ -10,6 +13,7 @@ $username = "root";
 $password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
+
 
 #
 # These functions are made for checking out either a chromebook or a charger 
@@ -96,10 +100,80 @@ function loaner_cb_log($id, $barcode) {
   }
 }
 
+function chromebook_to_repair_cbcart1($barcode) {
+   global $conn;
+   $sql = "UPDATE cbcart1 SET Repair='1' WHERE ITR='$barcode'";
+   $conn->query($sql);
+}
+
+function chromebook_to_repair_cbcart2($barcode) {
+   global $conn;
+   $sql = "UPDATE cbcart2 SET Repair='1' WHERE ITR='$barcode'";
+   $conn->query($sql);
+}
+
+function chromebook_to_repair_cbcart3($barcode) {
+   global $conn;
+   $sql = "UPDATE cbcart3 SET Repair='1' WHERE ITR='$barcode'";
+   $conn->query($sql);
+}
+
+function chromebook_to_repair_cbcart4($barcode) {
+   global $conn;
+   $sql = "UPDATE cbcart4 SET Repair='1' WHERE ITR='$barcode'";
+   $conn->query($sql);
+}
+
+function charger_to_repair($bardcode) {
+  global $conn;
+  $sql = "UPDATE loaner_chargers SET Repair='1' WHERE ITR='$barcode'";
+  $conn->query($sql);
+}
+
+
+function charger_out_of_repair($barcode) {
+  global $conn;
+  $sql = "UPDATE loaner_chargers SET Repair='0' WHERE ITR='$bardcode'";
+  $conn->query($sql);
+}
+
+
+function chromebook_out_of_repair_cbcart1($barcode) {
+  global $conn;
+  $sql = "UPDATE cbcart1 SET Repair='0' WHERE ITR='$barcode'";
+  $conn->query($sql);
+
+}
+
+
+function chromebook_out_of_repair_cbcart2($barcode) {
+  global $conn;
+  $sql = "UPDATE cbcart2 SET Repair='0' WHERE ITR='$barcode'";
+  $conn->query($sql);
+
+}
+
+function chromebook_out_of_repair_cbcart3($barcode) {
+  global $conn;
+  $sql = "UPDATE cbcart3 SET Repair='0' WHERE ITR='$barcode'";
+  $conn->query($sql);
+
+}
+
+function chromebook_out_of_repair_cbcart4($barcode) {
+  global $conn;
+  $sql = "UPDATE cbcart4 SET Repair='0' WHERE ITR='$barcode'";
+  $conn->query($sql);
+
+}
+
+
+
+
 #Randomize slots for the computer carts so that the wear and tear is equally distributed
 function print_cb_carts_random_c1() {
   global $conn;
-  $sql = "SELECT Cart FROM cbcart1 WHERE Check_out IS NULL ORDER BY RAND()";
+  $sql = "SELECT Cart FROM cbcart1 WHERE Check_out IS NULL AND Repair='0' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
   echo "<table border='1'>
         <tr>
@@ -119,7 +193,7 @@ function print_cb_carts_random_c1() {
 #Randomize slots for the computer carts so that the wear and tear is equally distributed
 function print_cb_carts_random_c2() {
   global $conn;
-  $sql = "SELECT Cart FROM cbcart2 WHERE Check_out IS NULL ORDER BY RAND()";
+  $sql = "SELECT Cart FROM cbcart2 WHERE Check_out IS NULL AND Repair='0' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
     echo "<table border='1'>
         <tr>
@@ -140,7 +214,7 @@ function print_cb_carts_random_c2() {
 #Randomize slots for the computer carts so that the wear and tear is equally distributed
 function print_cb_carts_random_c3() {
   global $conn;
-  $sql = "SELECT Cart FROM cbcart3 WHERE Check_out IS NULL ORDER BY RAND()";
+  $sql = "SELECT Cart FROM cbcart3 WHERE Check_out IS NULL AND Repair='0' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
   echo "<table border='1'>
       <tr>
@@ -160,7 +234,7 @@ function print_cb_carts_random_c3() {
 #Randomize slots for the computer carts so that the wear and tear is equally distributed
 function print_cb_carts_random_c4() {
   global $conn;
-  $sql = "SELECT Cart FROM cbcart4 WHERE Check_out IS NULL ORDER BY RAND()";
+  $sql = "SELECT Cart FROM cbcart4 WHERE Check_out IS NULL AND Repair='0' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
   echo "<table border='1'>
       <tr>
@@ -177,15 +251,6 @@ function print_cb_carts_random_c4() {
     echo "</table>";
 
 }
-
-#Finding duplicates within the main chromebook_lonaer database
-#function find_duplicates_in_table($id) {
-#  global $conn;
-#  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chromebooks GROUP BY Student_Number HAVING COUNT(Student_Number) > 1";
-#  if ($conn->query($sql) == TRUE) {
-#    echo "found duplicate";
-#  }
-#}
 
 function set_check_out_back_to_null_cb(){
   global $conn;

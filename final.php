@@ -18,6 +18,17 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 #
 #
 
+function check_if_active_student($id) {
+ global $conn;
+ $sql = "SELECT ps FROM Student_Number WHERE Student_Number='$id'";
+ $result = $conn->query($sql);
+ if($result->num_rows == 1) {
+    echo "User is an active student";
+    return true;
+ } 
+    echo "User is not a active student in powerschool!";
+    return false;
+ }
 
 function loaner_charger($id, $barcode) {
   global $CHECK_OUT_TIME;

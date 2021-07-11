@@ -19,13 +19,11 @@ include_once('/Users/smol/fun/PHP_CB/login.php');
     echo "Unable to send. Please try again";
    }
  }
-
  #fix format
  function adding_user($user, $pass, $role) {
   global $conn;
-  $GLOBALS['password'] = password_hash($pass,  PASSWORD_DEFAULT);
-  #$$pass = $GLOBALS['password'];
-  $sql = "INSERT INTO users (username, password, role) VALUES ('$user', '$pass', '$role')";
+  $md5password = md5($pass); 
+  $sql = "INSERT INTO users (username, password, role) VALUES ('$user', '$md5password', '$role')";
   $data = $conn->query($sql);
   if ($data) {
     echo "Your registration is complete!";

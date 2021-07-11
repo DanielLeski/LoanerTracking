@@ -1,4 +1,5 @@
 <?php
+#starts the session
 session_start();
 
 #coonnects to the sql server
@@ -11,21 +12,24 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 function check_for_access($user, $pas) {
   global $conn;
-  $sql = "SELECT username FROM users WHERE username='$user' AND password='$pas'";
+  $md5password = md5($pas);
+  $sql = "SELECT * FROM users WHERE username='$user' AND password='$md5password'";
   $result = $conn->query($sql);
-  if($result->num_rows === 1) {
-    $row = $result->fetch_assoc();
-    echo $row['role'];
-    $_SESSION['role'] = $row['role'];
-    $_SESSION['username'] = $row['username'];
-    echo $row['role'];
-    if($row['role'] === 'admin') {
-      header("Location:index.php");
-      die();
+  $getNumRows = mysqli_num_rows($result);
+  if($getNumRows == 1) {
+    $getNumRows = mysqli_fetch_assoc($result);
+    unset($getNumRows['password']);
+    $_SESSION = $getNumRows;
+    if ($_SESSION['role'] == 'admin') {
+    header("Location:adminUser.php");
+    exit();
     } else {
-      echo $row['role'];
-      header("Location:regularUser.php");
+     header("Location:regularUser.php");
+     exit();
+     }
     }
   }
- }
+
+
+
 ?>

@@ -5,9 +5,16 @@ include_once('/Users/smol/fun/PHP_CB/login.php');
  $password = "pk1212";
  $db_name = "newphp";
  $conn = mysqli_connect($servername, $username, $password, $db_name);
+
  global $message;
  global $password;
  global $role;
+
+#
+# 
+#
+#
+
 
  function emailing_access_code($to) {
    $subject = "Access Code";

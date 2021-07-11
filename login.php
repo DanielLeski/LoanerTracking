@@ -29,7 +29,4 @@ function check_for_access($user, $pas) {
      }
     }
   }
-
-
-
 ?>

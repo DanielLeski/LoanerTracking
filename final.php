@@ -3,7 +3,6 @@
 session_start();
 
 
-#Variables that are kept for data purposes
 $CHECK_OUT_TIME;
 $CHECK_IN_TIME;
 
@@ -57,7 +56,6 @@ function loaner_chromebook($id, $barcode) {
   }
 }
 
-function loaner_chromebook
 
 function loaner_chromebook_cart1($id, $barcode) {
   global $CHECK_OUT_TIME;

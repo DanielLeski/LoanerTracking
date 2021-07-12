@@ -31,7 +31,7 @@ $smtp = Mail::factory('smtp',
 
     array ('host' => $host));
 
-function send_email_to_student($br, $checkout) {
+function send_email_to_student() {
     global $smtp;
     global $headers;
     global $body; 

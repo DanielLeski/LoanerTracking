@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include('/home/administrator/LoanerTracking/final.php');
+<?php include_once('/home/administrator/LoanerTracking/final.php');
 ?>
 <head>
 <div class="container">

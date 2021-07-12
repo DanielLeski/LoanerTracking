@@ -14,15 +14,5 @@ This uses mySQL to track information into a database but the commented code with
 - Prevent mySQL injections
   - This was kind of overlooked because this was done on the fly while learning the materials needed to complete the project, looking to implement this soon. But where it's being deployed it'll sure it's purpose.
 
-- Implement mySQL triggers
-  - This will make logging changes into a table that is meant for logs a little nicer in my opinion instead of writing another method ffor INSERT
-- Send emails to the students after a specific amount of time after check out
-- Rework the front-end to make it seem a little nicer
 
-
-
-7-7-2021:
-1) To make verification user verification 
-2) Check upon the active student list of the powerschool
-3) Make sure to display a error box 
 

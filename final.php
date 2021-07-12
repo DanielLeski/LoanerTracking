@@ -10,7 +10,7 @@ $CHECK_IN_TIME;
 
 $servername = "127.0.0.1";
 $username = "dan";
-$password = "danL1212";
+$password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 

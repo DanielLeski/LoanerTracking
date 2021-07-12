@@ -11,11 +11,14 @@ $to = "ebuckley@dupage88.net";
 #Creating connection to the 
 $servername = "127.0.0.1";
 $username = "dan";
-$password = "danl1212";
+$password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
-
+global $message;
+global $password;
+global $role;
+ 
 
 $headers = array ('From' => $from,
 
@@ -37,26 +40,19 @@ function send_email_to_student($br, $checkout) {
 }
 
 
- global $message;
- global $password;
- global $role;
- 
- function emailing_access_code($to) {
+
+ function send_email_access_code($user) {
    global $message;
    global $smtp;
    global $headers;
-   global $body;
    global $to;
-
-   $subject = "Access Code";
-   $message  = rand(10,100);
-   $GLOBALS['message'] = $message;
-   
-  
+   $GLOBALS['body'] = rand(10,100); 
+   $smtp->send($to, $headers, $body); 
  }
 
 function get_student_information($br, $checkout){
   
+
 
 }
 

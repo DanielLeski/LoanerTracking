@@ -1,26 +1,13 @@
 <?php
-include_once('/Users/smol/fun/PHP_CB/login.php');
- $servername = "127.0.0.1";
- $username = "root";
- $password = "pk1212";
- $db_name = "newphp";
- $conn = mysqli_connect($servername, $username, $password, $db_name);
+include_once('/home/administrator/LoanerTracking/login.php');
 
- global $message;
- global $password;
- global $role;
+$servername = "127.0.0.1";
+$username = "dan";
+$password = "danL1212";
+$db_name = "newphp";
+$conn = mysqli_connect($servername, $username, $password, $db_name);
+
  
- function emailing_access_code($to) {
-   global $message;
-   $subject = "Access Code";
-   $message  = rand(10,100);
-   $GLOBALS['message'] = $message;
-  if(mail($to, $subject, $message)) {
-    echo "Your mail has been sent successfully";
-   } else {
-    echo "Unable to send. Please try again";
-   }
- }
  
  function adding_user($user, $pass, $role, $code) {
    global $conn;

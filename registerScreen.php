@@ -2,8 +2,8 @@
 
 <html lang="en">
 <?php
- include('/home/administrator/LoanerTracking/register.php'); 
- include('/home/administrator/LoanerTracking/mailer.php');
+ include_once('/home/administrator/LoanerTracking/register.php'); 
+ include_once('/home/administrator/LoanerTracking/mailer.php');
 ?>
 
 <head>

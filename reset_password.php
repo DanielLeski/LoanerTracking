@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
-    include('/home/administrator/LoanerTracking/reset_password_code.php');
-    include('/home/administrator/LoanerTracking/register.php');
-    include('/home/administrator/LoanerTracking/mailer.php');
+    include_once('/home/administrator/LoanerTracking/reset_password_code.php');
+    include_once('/home/administrator/LoanerTracking/register.php');
+    include_once('/home/administrator/LoanerTracking/mailer.php');
 ?>
 
 <head>

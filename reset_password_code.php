@@ -1,6 +1,6 @@
 <?php
 
-include("/home/administrator/LoanerTracking/register.php");
+include_once("/home/administrator/LoanerTracking/mailer.php");
 
 $servername = "127.0.0.1";
 $username = "dan";

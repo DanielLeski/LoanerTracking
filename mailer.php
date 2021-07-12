@@ -46,6 +46,7 @@ function send_email_to_student($br, $checkout) {
    global $smtp;
    global $headers;
    global $to;
+   global $body;
    $GLOBALS['body'] = rand(10,100); 
    $smtp->send($to, $headers, $body); 
  }

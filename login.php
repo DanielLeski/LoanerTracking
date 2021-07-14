@@ -21,8 +21,8 @@ function check_for_access($user, $pas) {
     unset($getNumRows['password']);
     $_SESSION = $getNumRows;
     if ($_SESSION['role'] == 'admin') {
-    header("Location:adminUser.php");
-    exit();
+     header("Location:adminUser.php");
+     exit();
     } else {
      header("Location:regularUser.php");
      exit();

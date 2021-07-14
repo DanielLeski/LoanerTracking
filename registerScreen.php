@@ -15,37 +15,42 @@
     .wrapper{width: 360px; padding: 20px;}
   </style>
   </head>
-  <?php
-		$register_selected = 'unchecked';
-		$modify_selected = 'unchecked';
-  	if(isset($_POST['submit'])) {
-      $selected_radio = $_POST['c'];
-      if($selected_radio === null) {
-        echo "Please choose to either register or modify";
-      }
-				if($selected_radio == 'register') {
-					$register_selected = 'checked';
-					$user = $_POST['username'];
-    			$ps = $_POST['password'];
-    		  $role = $_POST['role'];
-          $code = $_POST['access'];
-    		  adding_user($user, $ps, $role, $code);
-          header("Location:index.php");
-			} elseif($selected_radio == 'modify')	{
-					$modify_selected = 'checked';
-					$user = $_POST['username'];
-					$ps = $_POST['password'];
-					$role = $_POST['role'];
-          $code = $_POST['access'];
-					modify_user($user, $ps, $role, $code);
-          header("Location:index.php");
-					}
-         }
-       if(isset($_POST['code'])) {
-	      $user = $_POST['mail'];
-         send_email_access_code($user);
-       } 
-      ?>
+<?php
+ $register_selected = 'unchecked';
+ $modify_selected = 'unchecked';
+ if(isset($_POST['submit'])) {
+	 $selected_radio = $_POST['c'];
+	 if($selected_radio === null) {
+		 echo "Please choose to either register or modify";
+	 }
+	 if($selected_radio == 'register') {
+		 $register_selected = 'checked';
+		 $user = $_POST['username'];
+		 $ps = $_POST['password'];
+		 $role = $_POST['role'];
+		 $code = $_POST['access'];
+		 adding_user($user, $ps, $role, $code);
+		 header("Location:index.php");
+	 } elseif($selected_radio == 'modify')	{
+		 $modify_selected = 'checked';
+		 $user = $_POST['username'];
+		 $ps = $_POST['password'];
+		 $role = $_POST['role'];
+		 $code = $_POST['access'];
+		 modify_user($user, $ps, $role, $code);
+		 header("Location:index.php");
+	 }
+ }
+ if(isset($_POST['email'])) {
+    $user = $_POST['mail'];
+    send_email_access_code($user);
+ } 
+
+
+ if(isset($_POST['backtologin'])) {
+   header("Location:index.php");
+ }
+?>
 <body>
   <div class="wrapper">
   <h2>Register</h2>
@@ -95,13 +100,26 @@
 
 
 <div class="emailing">
-<form action='' method="POST">
+<form action='' method="post">
   <br>
-  <label for="email">Email</label>
+  <label for="email">email</label>
   <input type="email" id="email" name="mail" value="">
   <br>
-  <input type="submit" class="btn btn-primary" name="code" value="email">
+  <input type="submit" class="btn btn-primary" name="email" value="email">
  </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="backtologin">
+  <form action="" method="post">
+    <input type="submit" name="backtologin" value="login in screen">
+    </form>
+
 
 
 </html>

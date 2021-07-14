@@ -29,7 +29,7 @@
       }
     }
 
-    if(isset($_POST['Reset'])) {
+    if(isset($_POST['reset'])) {
       header("Location:reset_password.php");
     }
     ?>
@@ -64,7 +64,7 @@
 
 <div class="reset">
   <form action="" method="post">
-    <input type="submit" name="Reset" value="Reset Password">
+    <input type="submit" name="reset" value="reset password">
     </form>
  
 </div>

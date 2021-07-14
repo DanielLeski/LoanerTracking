@@ -1,5 +1,6 @@
 <?php
 include_once('/home/administrator/LoanerTracking/login.php');
+include_once('/home/administrator/LoanerTracking/mailer.php');
 
 $servername = "127.0.0.1";
 $username = "dan";
@@ -12,7 +13,7 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 function adding_user($user, $pass, $role, $code) {
    global $conn;
    global $message;
-   if ($code === $GLOBALS['message']) {
+   if ($code === $GLOBALS['access_code']) {
      $md5password = md5($pass); 
      $sql = "INSERT INTO users (username, password, role) VALUES ('$user', '$md5password', '$role')";
      $data = $conn->query($sql);
@@ -27,7 +28,7 @@ function adding_user($user, $pass, $role, $code) {
  function modify_user($user, $pass, $role) {
   global $conn;
   global $password; 
-  if ($code === $GLOBALS['message']) {
+  if ($code === $GLOBALS['access_code']) {
    $m5password_updated = md5($pass);
    $sql = "UPDATE users SET role='$role' WHERE username='$user' AND password='$m5password_updated'";
    $data = $conn->query($sql);

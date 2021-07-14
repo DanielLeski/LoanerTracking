@@ -25,15 +25,16 @@
      header("Location:index.php");  
   }
 
-  if(isset($_POST['code'])) {
-    $email = $_POST['mail'];
-    echo emailing_access_code($email);
+  if(isset($_POST['email'])) {
+    $user = $_POST['mail'];	  
+    send_email_access_code($user);
   }
+ if(isset($_POST['backtologin'])) {
+    header("Location:index.php");
+ }
+
 
 ?>
-
-
-
 
 <body>
  <div class="wrapper">
@@ -56,14 +57,30 @@
   <input type="submit" class="btn btn-primary" name="submit" value="Reset">
     </div>
 
+<br>
+<br>
+<br>
 
 <div class="emailing">
-<form action='' method="POST">
+<form action='' method="post">
   <br>
-  <label for="email">Email</label>
+  <label for="email">email</label>
   <input type="email" id="email" name="mail" value="">
   <br>
-  <input type="submit" class="btn btn-primary" name="code" value="email">
+  <input type="submit" class="btn btn-primary" name="email" value="Email">
  </div>
 
 
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="backtologin">
+  <form action="" method="post">
+    <input type="submit" name="backtologin" value="login in screen">
+    </form>
+
+</html>

@@ -10,9 +10,10 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 function reset_password($user, $pas, $code) { 
    global $conn;
-   $code = intval($code);
-   if($code === $GLOBALS['message']) {
-      $sql = "UPDATE users SET password='$pas' WHERE username='$user'";
+   $code = strval($code);
+   if($code === $GLOBALS['access_code']) {
+      $md5password = md5($pas);
+      $sql = "UPDATE users SET password='$md5password'  WHERE username='$user'";
       $conn->query($sql);
    }
 }

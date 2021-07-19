@@ -36,6 +36,7 @@ $smtp = Mail::factory('smtp',
 #
 
  function send_email_access_code($user) {
+   global $conn;
    global $smtp;
    global $headers;
    global $access_code;
@@ -43,7 +44,7 @@ $smtp = Mail::factory('smtp',
    global $to;
    global $from;
    $GLOBALS['to'] = $user;
-   $GLOBALS['body'] = strval(rand(10, 100));
+ #https://stackoverflow.com/questions/6881424/how-can-i-select-the-row-with-the-highest-id-in-mysql/20904650
    $mail = $smtp->send($to, $headers, $body);
  }
 ?>

@@ -21,7 +21,7 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 # they are grabbing and the time that they checked out the device1
 #
 #
-//Find
+
 function check_if_active_student($id) {
  global $conn;
  $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
@@ -32,6 +32,21 @@ function check_if_active_student($id) {
  } 
     return false;
  }
+
+function check_if_correct_barcode($br) {
+ global $conn;
+ $sql = "SELECT * FROM loaner_chromebooks, cbcart1, cbcart2, cbcart3, cbcart4 WHERE ITR='$br'";
+ $result = $conn->query($sql);
+ $getNumRows = mysqli_num_rows($result);
+ if($getNumRows === 1) {
+  echo "device/charger is updated";
+  return true;
+ } else {
+  echo "Please check the barcode, make sure you typed it in correctly";
+  return false;
+ }
+
+}
 
 function loaner_charger($id, $barcode) {
   global $CHECK_OUT_TIME;

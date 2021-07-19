@@ -74,7 +74,6 @@
 				 } else {
 					echo "This student is not an active student";
 					}
-
 				  loaner_charger($id,$brcc);
           add_check_out_time_c($br);
           loaner_chromebook($id, $br);

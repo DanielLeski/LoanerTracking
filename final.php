@@ -9,8 +9,8 @@ $CHECK_IN_TIME;
 #Connects to the sql server
 
 $servername = "127.0.0.1";
-$username = "root";
-$password = "pk1212";
+$username = "dan";
+$password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
@@ -21,16 +21,15 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 # they are grabbing and the time that they checked out the device1
 #
 #
-
+//Find
 function check_if_active_student($id) {
  global $conn;
- $sql = "SELECT ps FROM Student_Number WHERE Student_Number='$id'";
+ $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
  $result = $conn->query($sql);
- if($result->num_rows === 1) {
-    echo "User is an active student";
+ $getNumRows = mysqli_num_rows($result);
+ if($getNumRows === 1) {
     return true;
  } 
-    echo "User is not a active student in powerschool!";
     return false;
  }
 

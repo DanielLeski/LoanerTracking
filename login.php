@@ -23,9 +23,11 @@ function check_for_access($user, $pas) {
     if ($_SESSION['role'] == 'admin') {
      header("Location:adminUser.php");
      exit();
-    } else {
+    } elseif($_SESSION['role'] == 'regular') {
      header("Location:regularUser.php");
      exit();
+     } else {
+     header("Location:ss.php");
      }
     }
   }

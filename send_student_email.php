@@ -34,7 +34,11 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 #$smtp = Mail::factory('smtp',
   # array ('host' => $host));
- 
+$myfile = fopen("test.txt", "w")
+  $txt = "Daniel Leskiewicz";
+  fwrite($myfile, $txt);
+  fclose($myfile);
+
 $sql = "SELECT * FROM loaner_chromebooks WHERE Student_Number=NULL";
 $result = mysqli_query($conn, $sql);
 $getNumRows = mysqli_num_rows($result);

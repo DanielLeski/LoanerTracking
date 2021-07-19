@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include_once('/Users/smol/fun/LoanerTracking/final.php');
+<?php include_once('/home/dan/LoanerTracking/final.php');
 ?>
 <head>
 <div class="container">
@@ -70,12 +70,8 @@
         $brcc = $_POST['Charger_Barcode'];
         if(find_duplicates($id) === TRUE)  {
           echo "Duplicate Entry found for this Student ID for a Chromebook Loaner '$id'";
-         if(check_if_active_student($id) === TRUE) {
-					echo "Student is active";
-				 } else {
-					echo "This student is not an active student";
-					}
-
+         
+         if(check_if_active_student($id) === TRUE) {	
 				  loaner_charger($id,$brcc);
           add_check_out_time_c($br);
           loaner_chromebook($id, $br);
@@ -86,21 +82,29 @@
           add_check_out_time_cb($br);
           loaner_cb_log($id, $br);
           add_check_out_time_cb_log($br);
+          echo "Student is active";
+				 } else {
+					echo "This student is not an active student";
+					}
+        
          } elseif(find_duplicate_chargers($id) === TRUE){
           echo "Duplicate Entry found for this Student for a Charger '$id'";
+          
+
           if(check_if_active_student($id) === TRUE) {
-						echo "Student is active";
+							loaner_charger($id,$brcc);
+              add_check_out_time_c($br);
+              echo "Student is active";
 					}	else {
 						echo "This student is not active";
 					}
-					loaner_charger($id,$brcc);
-          add_check_out_time_c($br);
-         } else {
-					if(check_if_active_student($id) === TRUE) {
+				  
+          } else {
+					
+          if(check_if_active_student($id) === TRUE) {
 						echo "Student is active";
 					} else {
-						echo "This student is not active";
-	
+						echo "This student is not active";	
 					}
            loaner_charger($id,$brcc);
            add_check_out_time_c($br);

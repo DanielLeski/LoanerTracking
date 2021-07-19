@@ -37,7 +37,8 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
  
 $sql = "SELECT * FROM loaner_chromebooks WHERE Student_Number=NULL";
 $result = mysqli_query($conn, $sql);
-while($row = mysqli_fetch_array($result)) {
+$getNumRows = mysqli_num_rows($result);
+while($getNumRows = mysqli_fetch_array($result)) {
  echo "done";
  echo $row['ITR'];
  echo $row['Serial'];

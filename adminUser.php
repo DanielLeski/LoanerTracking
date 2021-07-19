@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php include_once('/home/administrator/LoanerTracking/final.php');
+<?php include_once('/Users/smol/fun/LoanerTracking/final.php');
 ?>
 <head>
 <div class="container">
@@ -182,14 +182,62 @@
       session_unset();
       header("Location:index.php");
     }
-?>
+ ?>
 
+<br>
 <div class="con">
-<form action='' method="POST">
+<form action="" method="post"> 
+<br>
+<section class="app">
+<i class="fa fa-rocket"></i>
+<article>
+<input type="checkbox" id="checkin" name="c"/ value="checkin"/>
+<div>
+<span>
+Check In
+</span>
+</div>
+</article>
+
+<article>
+<input type="checkbox" id="checkout" name="c" value="checkout"/>
+<div>
+<span>
+Check Out
+</span>
+</div>
+</article>
+
+<article>
+<input type="checkbox" id="repair" name="c" value="repair"/>
+<div>
+<span>
+Repair
+</span>
+</div>
+</article>
+
+<article>
+<input type="checkbox" id="returnRepair" name="c" value="returnRepair"/>
+<div>
+<span>
+Out Of Repair
+</div>
+</span>
+</article>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--
  <label for="Select-Choice">Choose a option(s)
  <br>
-  <label for="Checkout">Check Out</label>
+  <span for="Checkout">Check Out
   <input type="checkbox" id="checkout" name="c" value="checkout">
+  </span>
   <br>
   <label for="Checkin">Check In</label>
   <input type="checkbox" id="checkin" name="c" value="checkin">
@@ -201,24 +249,34 @@
   <input type="checkbox" id="returnRepair" name="c" value="returnRepair">
   <br>
 </div>
+---->
 
-
+<br>
+<br>
+<br>
 <br>
 <br>
 
 <label for="ID number">ID Number</label>
 <div>
 <input type="text" name="name" id="name" value="">
+</div>
 <div>
 <label for="Barcode of the device(chromebook)">Chromebook Barcode</label>
+</div>
 <div>
 <input type="text" name="Chromebook_Barcode" id="CB" value="">
+</div>
 <div>
 <label for="Barcode of the charger">Charger Barcode</label>
+</div>
 <div>
 <input type="text" name="Charger_Barcode" id="Charger" value="">
+</div>
 <div>
-<input type="submit" class="Button" name="Submit" value="Submit"/>
+<br>
+<input type="submit" class="Button" name="Submit" value="Submit">
+</div>
 </form>
 </head>
 
@@ -227,24 +285,23 @@
 <br>
 <br>
 
-
-<div style="width:400px; margin: auto;">
-<table style="float: left">
+<div style="width:400px; margin: auto;" class="tables">
+<table align="center" style="float: left">
 <tr>
 <td><?php print_cb_carts_random_c1(); ?></td>
 </tr>
 </table>
-<table style="float: left">
+<table align="center" style="float: left">
 <tr>
 <td><?php print_cb_carts_random_c2(); ?></td>
 </tr>
 </table>
-<table style="float: left">
+<table align="center" style="float: left">
 <tr>
 <td><?php print_cb_carts_random_c3(); ?></td>
 </tr>
 </table>
-<table style="float: left">
+<table align="center" style="float: left">
 <tr>
 <td><?php print_cb_carts_random_c4(); ?></td>
 </tr>
@@ -256,19 +313,49 @@
 <br>
 <br>
 
+
 <div class="log">
 <form action='index.php' method="POST">
-  <br>
-  <label for="logout">Log Out</label>
-  <input type="submit" id="logout" name="logout" value="logout">  
+<article class="logout">
+<input type="checkbox" id="logout" name="logout"/>
+<div>
+<span>
+Log Out
+</span>
+</div>
+</article>
 </div>
 </form>
 
 <style>
+
+
+.tables, th, td {
+  margin-left:auto;
+  margin-right:auto;
+  padding: 2.5px;
+  text-align: center;
+  }
+
+
+
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300italic,500);
 *{
 margin: 0px;
 padding: 0px;
+}
+
+.tables {
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+font-family: sans-serif;
+min-width: 400px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+fieldset{
+  float: left;
 }
 
 .log {
@@ -400,7 +487,102 @@ clear: both;
 td {
   text-align: right;
 }
+.app {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.app i {
+  font-size: 80px;
+  
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: 1;
+}
+
+article {
+  position: relative;
+  width: 140px;
+  height: 100px;
+  margin: 5px;
+  float: left;
+  border: 2px solid #50bcf2;
+  box-sizing: border-box;
+}
+
+article div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 25px;
+  transition: .5s ease;
+}
+
+article input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ div {
+  background-color: #50bcf2;
+}
+
+.upgrade-btn:hover {
+  background-color: #50bcf2;
+}
+
+.blue-color {
+  color: #50bcf2;
+}
+
+.gray-color {
+  color: #555;
+}
+
+.social i:before {
+  width: 14px;
+  height: 14px;
+  position: fixed;
+  color: #fff;
+  background: #0077B5;
+  padding: 10px;
+  border-radius: 50%;
+  top:5px;
+  right:5px;
+}
+
+@keyframes slidein {
+  from {
+    margin-top: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin: 0%;
+    width: 100%;
+  }
+}
+
+.dark-mode {
+ background-color:black;
+ color:white;
+}
+
+.dark{
+  background-color: #222;
+  color: #e6e6e6;
+}
+
+
 </style>
+
 
 <meta http-equiv="refresh" content="3600;"/>
 </html>

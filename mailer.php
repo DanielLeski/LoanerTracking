@@ -46,11 +46,4 @@ $smtp = Mail::factory('smtp',
    $GLOBALS['body'] = strval(rand(10, 100));
    $mail = $smtp->send($to, $headers, $body);
  }
-
- function update_password() {
-  global $conn;
-
- }
-
-
 ?>

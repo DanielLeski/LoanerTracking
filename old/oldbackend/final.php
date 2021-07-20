@@ -263,7 +263,6 @@ function print_cb_carts_random_c4() {
     echo "</tr>";
     $row = $row + 1;
   } while ($row <= 10);
-    echo "</table>";
 
 }
 
@@ -363,7 +362,7 @@ function add_checkin_to_cb2($barcode) {
 function add_checkin_to_cb3($barcode) {
   global $conn;
   global $CHECK_IN_TIME;
-  $CHECK_IN_TIME = date('Y-m-d H:i:s');
+  $CchmodHECK_IN_TIME = date('Y-m-d H:i:s');
   $sql = "UPDATE cbcart3 SET Check_in='$CHECK_IN_TIME'  WHERE ITR='$barcode'";
   $conn->query($sql);
 }

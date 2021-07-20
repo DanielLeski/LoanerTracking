@@ -13,7 +13,12 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 function adding_user($user, $pass, $role, $code) {
    global $conn;
    global $message;
-   if ($code === $GLOBALS['access_code']) {
+   $code = intval($code);
+  $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+   $result = $conn->query($sql);
+   $getNumRows = mysqli_num_rows($result);
+   $getAccessCode = mysqli_fetch_assoc($result);
+   if ($code === $getAccessCode['access']) {
      $md5password = md5($pass); 
      $sql = "INSERT INTO users (username, password, role) VALUES ('$user', '$md5password', '$role')";
      $data = $conn->query($sql);
@@ -25,10 +30,15 @@ function adding_user($user, $pass, $role, $code) {
   
  
  #changing a users permission
- function modify_user($user, $pass, $role) {
+ function modify_user($user, $pass, $role, $code) {
   global $conn;
-  global $password; 
-  if ($code === $GLOBALS['access_code']) {
+  global $password;
+  $code = intval($code);
+  $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+  $result = $conn->query($sql);
+  $getNumRows = mysqli_num_rows($result);
+  $getAccessCode = mysqli_fetch_assoc($result);
+  if ($code === $getAccessCode['access']) {
    $m5password_updated = md5($pass);
    $sql = "UPDATE users SET role='$role' WHERE username='$user' AND password='$m5password_updated'";
    $data = $conn->query($sql);

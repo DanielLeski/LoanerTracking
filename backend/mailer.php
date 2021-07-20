@@ -43,7 +43,11 @@ $smtp = Mail::factory('smtp',
    global $to;
    global $from;
    $GLOBALS['to'] = $user;
-   $GLOBALS['body'] = strval(rand(10, 100));
+   $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+   $result = $conn->query($sql);
+   $getNumRows = mysqli_num_rows($result);
+   $getAccessCode = mysqli_fetch_assoc($result);
+   echo $getAccessCode['access'];
    $mail = $smtp->send($to, $headers, $body);
  }
 ?>

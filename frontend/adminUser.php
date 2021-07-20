@@ -232,25 +232,6 @@ Out Of Repair
 <br>
 <br>
 
-<!--
- <label for="Select-Choice">Choose a option(s)
- <br>
-  <span for="Checkout">Check Out
-  <input type="checkbox" id="checkout" name="c" value="checkout">
-  </span>
-  <br>
-  <label for="Checkin">Check In</label>
-  <input type="checkbox" id="checkin" name="c" value="checkin">
-  <br>
-  <label for="Repair">Repair(Take out)</label>
-  <input type="checkbox" id="repair" name="c" value="repair">
-  <br>
-  <label for="returnRepair">Return Repair(Place back into cycle)</label>
-  <input type="checkbox" id="returnRepair" name="c" value="returnRepair">
-  <br>
-</div>
----->
-
 <br>
 <br>
 <br>

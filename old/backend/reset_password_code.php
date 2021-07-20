@@ -10,8 +10,12 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 function reset_password($user, $pas, $code) { 
    global $conn;
-   $code = strval($code);
-   if($code === $GLOBALS['access_code']) {
+   $code = intval($code);
+   $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+   $result = $conn->query($sql);
+   $getNumRows = mysqli_num_rows($result);
+   $getAccessCode = mysqli_fetch_assoc($result);
+   if($code === $getAccessCode['code']) {
       $md5password = md5($pas);
       $sql = "UPDATE users SET password='$md5password'  WHERE username='$user'";
       $conn->query($sql);

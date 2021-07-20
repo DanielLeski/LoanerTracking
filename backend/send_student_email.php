@@ -1,5 +1,4 @@
 <?php
-
 $servername = "127.0.0.1";
 $username = "root";
 $password = "pk1212";
@@ -34,7 +33,7 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 #$smtp = Mail::factory('smtp',
   # array ('host' => $host));
-$myfile = fopen("test.txt", "w")
+$myfile = fopen("/home/administrator/LoanerTracking/tmp/test.txt", "w");
   $txt = "Daniel Leskiewicz";
   fwrite($myfile, $txt);
   fclose($myfile);
@@ -42,10 +41,9 @@ $myfile = fopen("test.txt", "w")
 $sql = "SELECT * FROM loaner_chromebooks WHERE Student_Number=NULL";
 $result = mysqli_query($conn, $sql);
 $getNumRows = mysqli_num_rows($result);
-while($getNumRows = mysqli_fetch_array($result)) {
+while($getNumRows = mysqli_fetch_assoc($result)) {
  echo "done";
  echo $row['ITR'];
- echo $row['Serial'];
 }
 
 

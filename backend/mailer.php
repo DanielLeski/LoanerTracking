@@ -44,7 +44,11 @@ $smtp = Mail::factory('smtp',
    global $to;
    global $from;
    $GLOBALS['to'] = $user;
- #https://stackoverflow.com/questions/6881424/how-can-i-select-the-row-with-the-highest-id-in-mysql/20904650
+   $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+   $result = $conn->query($sql);
+   $getNumRows = mysqli_num_rows($result);
+   $getAccessCode = mysqli_fetch_assoc($result);
+   $GLOBALS['body'] = $getAccessCode['code'];
    $mail = $smtp->send($to, $headers, $body);
  }
 ?>

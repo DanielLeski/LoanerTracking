@@ -34,35 +34,32 @@
 						 echo "Duplicate Entry found for this Student ID '$id' for a chromebook loaner";
 					
  	        if(check_if_active_student($id) === TRUE) {
-							echo "Student is active";
+              loaner_chromebook($id, $br);  
+              loaner_chromebook_cart1($id, $br);
+              loaner_chromebook_cart2($id, $br);
+              loaner_chromebook_cart3($id, $br);
+              loaner_chromebook_cart4($id, $br);
+              add_check_out_time_cb($br);
+              loaner_cb_log($id, $br);
+              add_check_out_time_cb_log($br);
             } else {
 							echo "This student is not an active student";
 						}						
                       
-            loaner_chromebook($id, $br);  
-            loaner_chromebook_cart1($id, $br);
-            loaner_chromebook_cart2($id, $br);
-            loaner_chromebook_cart3($id, $br);
-            loaner_chromebook_cart4($id, $br);
-            add_check_out_time_cb($br);
-            loaner_cb_log($id, $br);
-            add_check_out_time_cb_log($br);
-          } else {
+       else {
 				  	if(check_if_active_student($id) === TRUE) {
-							echo "Student is active";
+              loaner_chromebook($id, $br);  
+              loaner_chromebook_cart1($id, $br);
+              loaner_chromebook_cart2($id, $br);
+              loaner_chromebook_cart3($id, $br);
+              loaner_chromebook_cart4($id, $br);
+              add_check_out_time_cb($br);
+              loaner_cb_log($id, $br);
+              add_check_out_time_cb_log($br);
 					}	else {
 						echo "This student is not an active student";
-					}
-					
-            loaner_chromebook($id, $br);  
-            loaner_chromebook_cart1($id, $br);
-            loaner_chromebook_cart2($id, $br);
-            loaner_chromebook_cart3($id, $br);
-            loaner_chromebook_cart4($id, $br);
-            add_check_out_time_cb($br);
-            loaner_cb_log($id, $br);
-            add_check_out_time_cb_log($br);
-          }  
+					}	
+        }  
     } else {
         $checkout_status = 'checked';
         $id = $_POST['name'];
@@ -82,7 +79,6 @@
           add_check_out_time_cb($br);
           loaner_cb_log($id, $br);
           add_check_out_time_cb_log($br);
-          echo "Student is active";
 				 } else {
 					echo "This student is not an active student";
 					}
@@ -94,28 +90,26 @@
           if(check_if_active_student($id) === TRUE) {
 							loaner_charger($id,$brcc);
               add_check_out_time_c($br);
-              echo "Student is active";
 					}	else {
 						echo "This student is not active";
 					}
 				  
-          } else {
+   } else {
 					
           if(check_if_active_student($id) === TRUE) {
-						echo "Student is active";
+            loaner_charger($id,$brcc);
+            add_check_out_time_c($br);
+            loaner_chromebook($id, $br);
+            loaner_chromebook_cart1($id, $br);
+            loaner_chromebook_cart2($id, $br);
+            loaner_chromebook_cart3($id, $br);
+            loaner_chromebook_cart4($id, $br);
+            add_check_out_time_cb($br);
+            loaner_cb_log($id, $br);
+            add_check_out_time_cb_log($br);
 					} else {
 						echo "This student is not active";	
 					}
-           loaner_charger($id,$brcc);
-           add_check_out_time_c($br);
-           loaner_chromebook($id, $br);
-           loaner_chromebook_cart1($id, $br);
-           loaner_chromebook_cart2($id, $br);
-           loaner_chromebook_cart3($id, $br);
-           loaner_chromebook_cart4($id, $br);
-           add_check_out_time_cb($br);
-           loaner_cb_log($id, $br);
-           add_check_out_time_cb_log($br);
          }
         }
    } elseif ($selected_radio == 'checkin') {
@@ -235,25 +229,6 @@ Out Of Repair
 <br>
 <br>
 <br>
-
-<!--
- <label for="Select-Choice">Choose a option(s)
- <br>
-  <span for="Checkout">Check Out
-  <input type="checkbox" id="checkout" name="c" value="checkout">
-  </span>
-  <br>
-  <label for="Checkin">Check In</label>
-  <input type="checkbox" id="checkin" name="c" value="checkin">
-  <br>
-  <label for="Repair">Repair(Take out)</label>
-  <input type="checkbox" id="repair" name="c" value="repair">
-  <br>
-  <label for="returnRepair">Return Repair(Place back into cycle)</label>
-  <input type="checkbox" id="returnRepair" name="c" value="returnRepair">
-  <br>
-</div>
----->
 
 <br>
 <br>

@@ -13,7 +13,7 @@ class User {
  private $username;
  private $password;
  private $role;
- private $access_to_carts = array();
+ public $access_to_carts = array();
 
  public function add_user_into_database($username, $password, $role, $code, $carts) {
   global $conn;
@@ -63,6 +63,10 @@ public function modify_user_permissions($user, $pass, $role, $code) {
      $conn->query($updateCarts);
     }
   }
+ }
+
+ public function parse_cart_information($username) {
+  
  }
 
 

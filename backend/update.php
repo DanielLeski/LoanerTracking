@@ -18,6 +18,17 @@ class sqlUpdater {
 public $CHECK_OUT_TIME;
 public $CHECK_IN_TIME;
 
+function check_if_active_statff($email) {
+ global $conn;
+ $sql = "SELECT * FROM Staff WHERE Email='$email'";
+ $result = $conn->query($sql);
+ $getNumRows = mysqli_num_rows($result);
+ if($getNumRows == 1) {
+  return true;
+ } else {
+  return false;
+ }
+}
 
 #Checking if the student is currently within the powerschool database("csv")
 function check_if_active_student($id) {

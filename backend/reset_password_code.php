@@ -8,6 +8,8 @@ $password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
+
+class reset_password {
 function reset_password($user, $pass, $code) {
  global $conn;
  $code = intval($code);
@@ -20,6 +22,7 @@ function reset_password($user, $pass, $code) {
   $sql = "UPDATE users SET password='$password_encrypt' WHERE username='$user'";
   $conn->query($sql);
 
- }
+  }
+ } 
 }
 ?>

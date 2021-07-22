@@ -25,7 +25,7 @@ $password = "newphp1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
-class Mail {
+class mailer {
  
   public function send_email_access_code($user) {
    global $conn;

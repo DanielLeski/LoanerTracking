@@ -1,37 +1,36 @@
 <?php
 
-$session_start();
+session_start();
 
 $servername = "127.0.0.1";
 $username = "root";
 $password = "pk1212";
 $db_name = "newphp";
-$conn = mysqli_connect($servername, $username, $db_name);
+$conn = mysqli_connect($servername, $username, $password, $db_name);
 
 class Login {
  
  #Checks the access and role of the user logining in so that they are redirected 
- public function check_for_access($user, $pass) {
+ function check_for_access($user, $pass) {
   global $conn;
-  $sql = "SELECT * FROM users WHERE username="$user" AND password="$pass"";
+  $md5password = md5($pass);
+  $sql = "SELECT * FROM users WHERE username='$user' AND password='$md5password'";
   $result = $conn->query($sql);
   $getNumRows = mysqli_num_rows($result);
   if($getNumRows == 1) {
-   $getRowInfo = mysqli_fetch_assoc($result);
-   unset($getRowInfo['password']);
-   unset($getRowInfo['username']);
-   $_SESSION = $getRowInfo;
-   if($_SESSION['role'] == 'admin') {
+    $getNumRows = mysqli_fetch_assoc($result);
+    unset($getNumRows['password']);
+    $_SESSION = $getNumRows;
+    if ($_SESSION['role'] == 'admin') {
      header("Location:adminUser.php");
-  } elseif ($_SESSION['role'] == 'regular') {
+     exit();
+    } elseif($_SESSION['role'] == 'regular') {
      header("Location:regularUser.php");
-  } else {
-    header("Location:ss.php");
+     exit();
+     } else {
+     header("Location:ss.php");
+     }
+    }
   }
- 
- }
-
-
-
 }
 ?>

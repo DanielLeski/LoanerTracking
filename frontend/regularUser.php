@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-<?php include_once('/Users/smol/fun/LoanerTracking/backend/update.php'); 
-     
-
+<?php include_once('/Users/smol/fun/LoanerTracking/backend/update.php');      
+      include_once('/Users/smol/fun/LoanerTracking/backend/user.php');
 ?>
 
 <head>
@@ -15,6 +14,7 @@
 <?php
  #Inilizing objects that are needed
  $sqlUpdate = new sqlUpdater;
+ $users = new User;
 
  $checkin_status = "unchecked";
  $checkout_status = "unchecked";
@@ -26,76 +26,77 @@
   if($selected_radio == "checkout") {
    if(isset($_POST['Chromebook_Barcode']) && $_POST['Chromebook_Barcode'] === "") {
     $checkout_status = "checked";
-    $id = $_POST['ID NUMBER'];
+    $id = $_POST['name'];
     $br = $_POST['Charger_Barcode'];
-    #find_duplicates_in_c($id);
-    loaner_charger($id);
-    add_check_out_time_c($barcode);
+    $sqlUpdate->find_duplicates_in_c($id);
+    $sqlUpdate->loaner_charger($id);
+    $sqlUpdate->add_check_out_time_c($barcode);
    }elseif(isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") {
     $checkout_status = "checked";
-    $id = $_POST['ID NUMBER'];
+    $id = $_POST['name'];
     $br = $_POST['Chromebook_Barcode'];
-    if(find_duplicates_in_cb($id) === TRUE) {
+    if($sqlUpdate->find_duplicates_in_cb($id) === TRUE) {
      echo "Duplicate Student ID is found"; 
     }
-    if(check_if_active_student($id) === TRUE && check_if_barcode_is_correcet($barcode) === TRUE) {
+    if($sqlUpdate->check_if_active_student($id) === TRUE OR $sqlUpdate->check_if_active_staff($id)&&$sqlUpdate-> check_if_barcode_is_correcet($barcode) === TRUE) {
      echo "Student is an active";
-     loaner_chromebook($id, $br);
-     loaner_cb_log($id, $br);
-     add_checkout_time_cb($barcode);
+     $sqlUpdate->loaner_chromebook($id, $br);
+     $sqlUpdate->loaner_cb_log($id, $br);
+     $sqlUpdate->add_checkout_time_cb($barcode);
     } else {
      echo "Make sure student is active or check if the right id number is typed";
     }
    } else {
     $checkout_status = 'checked';
-    $id = $_POST['ID NUMBER'];
+    $id = $_POST['name'];
     $brc = $_POST['Chromebook_Barcode'];
     $brcc = $_POST['Charger_Barcode'];
-    if(find_duplicates_in_c($id) === TRUE || find_duplicates_in_cb($id) === TRUE) {
+    if($sqlUpdate->find_duplicates_in_c($id) === TRUE OR $sqlUpdate->find_duplicates_in_cb($id) === TRUE) {
      echo "A duplicate entry has beeb found";
     }
-    if(check_if_active_student($id) === TRUE && check_if_barcode_is_correct($barcode) === TRUE) {
+    if($sqlUpdate->check_if_active_student($id) === TRUE OR $sqlUpdate->check_if_active_staff($id) === TRUE && check_if_barcode_is_correct($barcode) === TRUE) {
      echo "Student is Active";
-     loaner_charger($id);
-     add_check_out_time_c($barcode);
-     loaner_chromebook($id, $br);
-     add_checkout_time_c($barcode);
-     loaner_cb_log($id, $br);
-     add_checkout_time_cb($barcode);
+     $sqlUpdate->loaner_charger($id);
+     $sqlUpdate->add_check_out_time_c($barcode);
+     $sqlUpdate->loaner_chromebook($id, $br);
+     $sqlUpdate->add_checkout_time_c($barcode);
+     $sqlUpdate->loaner_cb_log($id, $br);
+     $sqlUpdate->add_checkout_time_cb($barcode);
     }
    }
   } elseif($selected_radio == 'checkin') {
      if(isset($_POST['Chromebook_Barcode']) && $_POST['Chromebook_Barcode'] === "") {
        $checkin_status = "checked";
-       $id = $_POST['ID NUMBER'];
+       $id = $_POST['name'];
        $br = $_POST['Charger_Barcode'];
-       return_charger($id, $br);
-       set_check_out_back_to_null_c();
+       $sqlUpdate->return_charger($id, $br);
+       $sqlUpdate->set_check_out_back_to_null_c();
     } elseif (isset($_POST['Charger_Barcode']) && $_POST['Charger_Barcode'] === "") {
        $checkedin_status = "chekced";
-       $id = $_POST['ID NUMBER'];
+       $id = $_POST['name'];
        $br = $_POST['Chromebook_Barcode'];
-       if(find_duplicates_in_cb($id) === TRUE) {
+       if($sqlUpdate->find_duplicates_in_cb($id) === TRUE) {
          echo "Duplicate Student ID is found";
        }
-       if(check_if_active_student($id) === TRUE && check_if_barcode_is_correct($barcode) === TRUE) {
-        return_chromebook($id, $br);
-        add_checkin_to_chromebooks($id, $br);
-        set_checkout_back_to_null_cb();
+       if($sqlUpdate->check_if_active_student($id) === TRUE OR $sqlUpdate->check_if_active_staff($id) === TRUE && $sqlUpdate->check_if_barcode_is_correct($barcode) === TRUE) {
+        $sqlUpdate->return_chromebook($id, $br);
+        $sqlUpdae->add_checkin_to_chromebooks($id, $br);
+        $sqlUpdate->set_checkout_back_to_null_cb();
   } else {
-       if(find_duplcates_in_c($id) === TRUE || find_duplicates_in_cb($id) === TRUE) {
+       if($sqlUpdate->find_duplcates_in_c($id) === TRUE OR $sqlUpdate->find_duplicates_in_cb($id) === TRUE) {
          echo "Duplicates has been found with this id number '$id'";
   }
-       if(check_if_active_student($id) === TRUE && check_if_barcode_is_correct($barcode) === TRUE) {
-        return_charger($id, $br);
-        set_check_out_back_to_null_c();
-        return_chromebook($id, $br);
-        add_checkin_to_chromebooks($id, $br);
-        set_checkout_back_to_null_cb();
+       if($sqlUpdate->check_if_active_student($id) === TRUE OR $sqlUpdate->check_if_active_staff($id) === TRUE && $sqlUpdate->check_if_barcode_is_correct($barcode) === TRUE) {
+        $sqlUpdate->return_charger($id, $br);
+        $sqlUpdate->set_check_out_back_to_null_c();
+        $sqlUpdate->return_chromebook($id, $br);
+        $sqlUpdate->add_checkin_to_chromebooks($id, $br);
+        $sqlUpdate->set_checkout_back_to_null_cb();
+     }
     }
-   }
-  }  
-}
+   }  
+  }
+ }
 
   if(isset($_POST['logout'])) {
    session_destroy();
@@ -130,23 +131,7 @@ Check Out
 </div>
 </article>
 
-<article>
-<input type="checkbox" id="repair" name="c" value="repair"/>
-<div>
-<span>
-Repair
-</span>
-</div>
-</article>
 
-<article>
-<input type="checkbox" id="returnRepair" name="c" value="returnRepair"/>
-<div>
-<span>
-Out of Repair
-</div>
-</span>
-</article>
 
 <br>
 <br>
@@ -159,7 +144,7 @@ Out of Repair
 <!-- Start of the input of the user -->
 <label for="ID Number">ID Number</label>
 <div>
-<input type="text" name="ID NUMBER" id="name" value=""/>
+<input type="text" name="name" id="name" value=""/>
 </div>
 <div>
 <label for="Barcode of the chromebook">Chromebook Barcode</label>
@@ -184,7 +169,7 @@ Out of Repair
 <div class="log">
 <form action="index.php" method="POST">
 <article class="logout">
-<input type="checkbox" id="logout" name="logout"/>
+<input type="submit" id="logout" name="logout" value="logout"/>
 <div>
 <span>
 Log Out
@@ -214,13 +199,20 @@ padding: 0px;
 }
 
 .tables {
-  border-collapse: collapse;
-margin: 25px 0;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 400px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+border-collapse: collapse;
+ margin: 25px 0;
+ font-size: 0.9em;
+ font-family: sans-serif;
+ min-width: 400px;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+ display: flex;
+ flex-direction: row;
+ flex-wrap: nowrap;
+ justify-content: center;
+ align-items: center;
+ align-content: stretch;
 }
+
 
 fieldset{
 float: left;
@@ -231,7 +223,7 @@ float: left;
   justify-content: 0 auto;
   align-items: center;
   margin:80px;
-  position:absolute1;
+  position:absolute;
 }
 
 body {
@@ -449,8 +441,6 @@ color:white;
   background-color: #222;
 color: #e6e6e6;
 }
-
-
 </style>
 
 

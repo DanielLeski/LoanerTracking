@@ -73,7 +73,6 @@ function parse_array($username) {
  $result = $conn->query($sql);
  $getUserCarts = mysqli_fetch_assoc($result);
  $array = explode(",", $getUserCarts['carts']);
- foreach ($array as $value) {
    if(in_array("WBCB1", $array)) {
     self::print_chromebook_cart_1();
    }
@@ -86,13 +85,16 @@ function parse_array($username) {
    if(in_array("WBCB4", $array)) {
     self::print_chromebook_cart_4();
    }
- }
+   if(in_array("n/a", $array)) {
+    echo "Chromebook Carts To Show";
+   }
 }
 
 function print_chromebook_cart_1() {
   global $conn;
   $sql = "SELECT * FROM CBcartAll WHERE Check_out='' AND Repair='0' AND ReferenceToCart='1' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
+  echo "<div>";
   echo "<table border='1'>
     <tr>
     <th> WBCB Cart 1: </th>
@@ -106,12 +108,14 @@ function print_chromebook_cart_1() {
     $row = $row + 1;
   } while ($row <= 10);
   echo "</table>";
+  echo "</div>";
  }
 
  function print_chromebook_cart_2() {
   global $conn;
   $sql = "SELECT * FROM CBcartAll WHERE Check_out='' AND Repair='0' AND ReferenceToCart='2' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
+  echo "<div>";
   echo "<table border='1'>
     <tr>
     <th> WBCB Cart 2: </th>
@@ -125,6 +129,7 @@ function print_chromebook_cart_1() {
     $row = $row + 1;
   } while ($row <= 10);
   echo "</table>";
+  echo "</div>";
 
 }
 
@@ -132,6 +137,7 @@ function print_chromebook_cart_1() {
   global $conn;
   $sql = "SELECT * FROM CBcartAll WHERE Check_out='' AND Repair='0' AND ReferenceToCart='3' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
+  echo "<div>";
   echo "<table border='1'>
     <tr>
     <th> WBCB Cart 3: </th>
@@ -144,13 +150,16 @@ function print_chromebook_cart_1() {
     echo "</tr>";
     $row = $row + 1;
   } while ($row <= 10);
+  echo "</div>";
   echo "</table>";
+  
 }
 
  function print_chromebook_cart_4() {
   global $conn;
   $sql = "SELECT * FROM cbcart4 WHERE Check_out='' AND Repair='0' AND ReferenceToCart='4' ORDER BY RAND()";
   $result = mysqli_query($conn, $sql);
+  echo "<div>";
   echo "<table border='1'>
     <tr>
     <th> WBCB Cart 4: </th>
@@ -163,6 +172,9 @@ function print_chromebook_cart_1() {
     echo "</tr>";
     $row = $row + 1;
   } while ($row <= 10);
+   echo "</div>";
+   echo "</table>";
+    
 }
 
 }

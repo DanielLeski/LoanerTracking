@@ -18,30 +18,32 @@ class sqlUpdater {
 public $CHECK_OUT_TIME;
 public $CHECK_IN_TIME;
 
-function check_if_active_statff($email) {
- global $conn;
- $sql = "SELECT * FROM Staff WHERE Email='$email'";
- $result = $conn->query($sql);
- $getNumRows = mysqli_num_rows($result);
- if($getNumRows == 1) {
-  return true;
- } else {
-  return false;
- }
-}
+#function check_if_active_statff($email) {
+# global $conn;
+# $sql = "SELECT * FROM Staff WHERE Email='$email'";
+# $result = mysqli_query($conn, $sql);
+# echo mysqli_error($conn);
+# $getNumRows = mysqli_num_rows($result);
+# if($getNumRows == 1) {
+#  return true;
+# } else {
+#  return false;
+# }
+#}
 
 #Checking if the student is currently within the powerschool database("csv")
-function check_if_active_student($id) {
- global $conn;
- $sql = "SELECT * FROM ps WHERE Studnet_Number='$id'";
- $result = $conn->query($sql);
- $getNumRows = mysqli_num_rows($result);
- if($getNumRows == 1) {
-  return true;
- } else {
-  return false;
- }
-}
+#function check_if_active_student($id) {
+# global $conn;
+# $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
+ #echo $sql;
+ #$result = $conn->query($sql);
+ #$getNumRows = mysqli_num_rows($result);
+ #if($getNumRows == 1) {
+ # return true;
+ #} else {
+ # return false;
+ #}
+#}
 
 #Checking that the requested device that is being checked out is a valid and active one 
 function check_if_barcode_is_correct($barcode) {
@@ -56,6 +58,13 @@ function check_if_barcode_is_correct($barcode) {
   echo "Please check the barcode";
   return false;
  }
+}
+
+function chromebook_long_term_repair($barcode) {
+ global $conn;
+ $sql = "UPDATE CBcartAll SET LongTermRepair='1' WHERE ITR='$barcode'";
+ $conn->query($sql);
+}
 
 #Loaning a charger to a student
 function loaner_charger($id, $barcode) {
@@ -197,7 +206,7 @@ function add_checkin_to_chromebooks($barcode) {
 }
 
 #Finding duplicates within the chromebook table
-function find_duplicates_in_cb($id) {
+public function find_duplicates_in_cb($id) {
  global $conn;
  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM CBcartAll WHERE Student_Number IS NOT NULL AND Student_Number='$id' GROUP BY Student_Number HAVING COUNT(Student_Number) >=1";
  while($ar = mysqli_fetch_array(mysqli_query($conn, $sql))) {
@@ -206,9 +215,8 @@ function find_duplicates_in_cb($id) {
  }
   return false;
  }
-}
 
-function find_duplicates_in_c($id) {
+public function find_duplicates_in_c($id) {
  global $conn;
  $sql = "SELECT Student_Number, COUNT(Student_Number) FROM loaner_chargers WHERE Student_Number IS NOT NULL AND Student_Number='$id' GROUP BY Student_Number HAVING COUNT(Student_Number) >= 1";
  while($ar = mysqli_fetch_array(mysqli_query($conn, $sql))) {

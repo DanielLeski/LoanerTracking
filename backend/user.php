@@ -2,8 +2,8 @@
 
 #include the proper includes statements 
 $servername = "127.0.0.1";
-$username = "root";
-$password = "pk1212";
+$username = "dan";
+$password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
@@ -12,12 +12,12 @@ class User {
 
  function add_user_into_database($username, $password, $role) {
   global $conn;
-  #$code = intval($code);
-  #$sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
-  #$result = $conn->query($sql);
-  #$getNumRows = mysqli_num_rows($result);
-  #$getAccessCode = mysqli_fetch_assoc($result);
-  #if ($code == $getAccessCode['code']) {
+  $code = intval($code);
+  $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
+  $result = $conn->query($sql);
+  $getNumRows = mysqli_num_rows($result);
+  $getAccessCode = mysqli_fetch_assoc($result);
+  if ($code == $getAccessCode['code']) {
     $md5password = md5($password); 
     $sql = "INSERT INTO users (username, password, role) VALUES ('$username', '$md5password', '$role')";
     $data = $conn->query($sql);
@@ -25,7 +25,7 @@ class User {
      echo "Your registration is complete!";
    }
  }
-#}
+}
 
  function add_carts_to_user($user, $cart) {
   global $conn;

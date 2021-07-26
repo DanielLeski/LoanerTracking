@@ -1,6 +1,6 @@
 <?php
 
-include_once("/Users/smol/fun/LoanerTracking/backend/mailer.php");
+include_once("/home/administrator/LoanerTracking/backend/mailer.php");
 
 $servername = "127.0.0.1";
 $username = "dan";

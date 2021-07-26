@@ -3,11 +3,10 @@
 #Creates a session when the page is loaded
 session_start();
 
-
 #Getting a connection to the mysql database
 $servername = "127.0.0.1";
-$username = "root";
-$password = "pk1212";
+$username = "dan";
+$password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
@@ -18,32 +17,31 @@ class sqlUpdater {
 public $CHECK_OUT_TIME;
 public $CHECK_IN_TIME;
 
-#function check_if_active_statff($email) {
-# global $conn;
-# $sql = "SELECT * FROM Staff WHERE Email='$email'";
-# $result = mysqli_query($conn, $sql);
-# echo mysqli_error($conn);
-# $getNumRows = mysqli_num_rows($result);
-# if($getNumRows == 1) {
-#  return true;
-# } else {
-#  return false;
-# }
-#}
+function check_if_active_statff($email) {
+ global $conn;
+ $sql = "SELECT * FROM Staff WHERE Email='$email'";
+ $result = mysqli_query($conn, $sql);
+ echo mysqli_error($conn);
+ $getNumRows = mysqli_num_rows($result);
+ if($getNumRows == 1) {
+  return true;
+ } else {
+  return false;
+ }
+}
 
 #Checking if the student is currently within the powerschool database("csv")
-#function check_if_active_student($id) {
-# global $conn;
-# $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
- #echo $sql;
- #$result = $conn->query($sql);
- #$getNumRows = mysqli_num_rows($result);
- #if($getNumRows == 1) {
- # return true;
- #} else {
- # return false;
- #}
-#}
+function check_if_active_student($id) {
+ global $conn;
+ $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
+$result = $conn->query($sql);
+$getNumRows = mysqli_num_rows($result);
+ if($getNumRows == 1) {
+  return true;
+ } else {
+  return false;
+ }
+}
 
 #Checking that the requested device that is being checked out is a valid and active one 
 function check_if_barcode_is_correct($barcode) {

@@ -140,58 +140,78 @@
    header("Location:index.php");
   }
 ?>
+<script>
+$(document).ready(function() {
+ $("#cin").checked(function() {
+   $("#cout").hide();
+ )
+)
+</script>
+
 
 <br>
-<div class="con">
+<div id="con" class="con">
 <form action="" method="POST">
 <br>
 <section class="app">
 <i class="fa fa-rocket"></i>
 
 <!-- Start of the button layout -->
-<article>
+<article class="chckin" id="chckin">
 <input type="checkbox" id="checkin" name="c" value="checkin"/>
-<div>
+<div id="cin" class="cin">
 <span>
-Check In
+Check In Device
 </span>
 </div>
 </article>
 
-<article>
+<article class ="chckout" id="chckout">
 <input type="checkbox" id="checkout" name="c" value="checkout"/>
-<div>
+<div id="cout" class="cout">
 <span>
-Check Out
+Check Out Device
 </span>
 </div>
 </article>
 
-<article>
+<article class="repair">
 <input type="checkbox" id="repair" name="c" value="repair"/>
-<div>
+<div id="rp" class="rp">
 <span>
-Repair
+Repair Device
 </span>
 </div>
 </article>
 
-<article>
+<article class="returnRepair">
 <input type="checkbox" id="returnRepair" name="c" value="returnRepair"/>
-<div>
+<div id="returnp" class="returnp">
 <span>
-Out of Repair
+Device Out of Repair
 </div>
 </span>
 </article>
-<article class="ltr">
+
+<article class='ltr'>
 <input type="checkbox" id="LongTermRepair" name="c" value="returnRepair"/>
-<div>
+<div class="ltld">
 <span>
-Long Term Loaner
+Long Term Loaner Device
 </div>
 </span>
 </article>
+</div>
+
+<article class='oltr'>
+<input type="checkbox" id="LongTermRepair" name="c" value="returnRepair"/>
+<div class="ooltl">
+<span>
+Out Of Long Term Loaner
+</div>
+</span>
+</article>
+</div>
 
 <br>
 <br>
@@ -209,7 +229,7 @@ Long Term Loaner
 <br>
 <br>
 
-
+<div id="input">
 <!-- Start of the input of the user -->
 <label for="name">ID Number</label>
 <br>
@@ -240,9 +260,11 @@ Long Term Loaner
 </div>
 </form>
 </head>
+</div>
+
 
 <br>
-<div style="width:300px;" class="t">
+<div id='data' style="width:300px;" class="t">
 <table>
 <tr>
 <td><?php 
@@ -270,11 +292,6 @@ Log Out
 <!--- Style of the background and the tables --->
 <style>
 
-
-.ltr {
- margin:0 auto;
- margin-left:80px;
-}
 table, th, td {
   margin-left:auto;
   margin-right:auto;
@@ -304,11 +321,6 @@ padding: 0px;
   align-content: stretch;
 }
 
-
-.t {
-  {
-  }
-}
 
 fieldset{
 float: left;
@@ -462,14 +474,14 @@ width: 140px;
 height: 100px;
 margin: 5px;
 float: left;
-border: 2px solid #50bcf2;
-        box-sizing: border-box;
+border: 2px solid #00008b;
+box-sizing: border-box;
 }
 
 article div {
 width: 100%;
 height: 100%;
-display: flex;
+display: flex-start;
          justify-content: center;
          align-items: center;
          line-height: 25px;
@@ -486,6 +498,44 @@ opacity: 0;
 cursor: pointer;
 }
 
+span {
+ top:100px;
+}
+
+.con {
+ text-align: center;
+}
+
+
+.chckin {
+ right:75px;
+}
+
+.chckout {
+ right:70px;
+}
+
+.repair {
+ width:145px;
+ bottom: 110px;
+ left:230px; 
+}
+
+.returnRepair {
+ bottom:110px;
+ right:75px;
+}
+
+.ltr {
+ bottom:110px;
+ right:70px;
+}
+
+.oltr {
+ bottom:110px;
+ right:70px; 
+
+}
 input[type=checkbox]:checked ~ div {
   background-color: #50bcf2;
 }
@@ -535,10 +585,6 @@ color:white;
   background-color: #222;
 color: #e6e6e6;
 }
-
-
 </style>
-
-
 <meta http-equiv="refresh" content="3600;"/>
 </html>

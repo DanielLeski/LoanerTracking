@@ -20,7 +20,7 @@ This uses mySQL to track information into a database but the commented code with
    - Login in with the current login that your just created 
    - Make sure all of the buttons work meaning (clickable, highlight when clicked)
    - Make user the input (username(ID Number), Chromebook Barcode, Charger Barcode) get displayed after clicking/selecting a button
-  - Check mysql if the record is updated correctly
+   - Check mysql if the record is updated correctly
  - Step 3
    - Make sure when clicking 'cancel' reloads the page, and updates the WBCB Cart table.
    - Make sure the logout button redirects back to the login screen (index.php)

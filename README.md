@@ -15,11 +15,11 @@ This uses mySQL to track information into a database but the commented code with
 ## Instructions to use / Test:
 - Unit Test 1
   - Step 1
-   - Register yourself as a user. You will need a admin (Dr.eb) to get you the access code to setup your account. 
-   - To register you will need to first get an access code.
-   - Click the register radio button
-   - Insert username, password, Role, Carts (WBCB1 and etc), Access Code that you recieved
-   - Click Enter or the register button
+    - Register yourself as a user. You will need a admin (Dr.eb) to get you the access code to setup your account. 
+    - To register you will need to first get an access code.
+    - Click the register radio button
+    - Insert username, password, Role, Carts (WBCB1 and etc), Access Code that you recieved
+    - Click Enter or the register button
   - Step 2
    - Login in with the current login that your just created 
    - Make sure all of the buttons work meaning (clickable, highlight when clicked)

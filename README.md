@@ -11,8 +11,5 @@ This is a quickly made project to track students on who, what, when checked out 
 This uses mySQL to track information into a database but the commented code within the "final.php" can be used for local storage type of tracking if mySQL is not needed. 
 
 
-## WORK THAT IS LEFT:
-
-
 
 

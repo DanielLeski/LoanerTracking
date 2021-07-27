@@ -13,7 +13,7 @@ This uses mySQL to track information into a database but the commented code with
 
 
 ## Instructions to use / Test:
-- Unit Test 1
+### Unit Test 1
  - Step 1
     - Register yourself as a user. You will need a admin (Dr.eb) to get you the access code to setup your account. 
     - To register you will need to first get an access code.
@@ -28,14 +28,14 @@ This uses mySQL to track information into a database but the commented code with
  - Step 3
    - Make sure when clicking 'cancel' reloads the page, and updates the WBCB Cart table.
    - Make sure the logout button redirects back to the login screen (index.php)
-- Unit Test 2
+### Unit Test 2
  - Step 1
   - Go back to the register screen
   - Use the same type of procedure with the register radio button but now test 'Modify' (modify changes a persons role (admin or regular))
   - Check mysql if the information is updated in the users (use your account that was created earlier in the process, don't worry if you want your admin status badge back you have to talk to dan .. )
  - Step 2
    - With either being a regular user or admin before hand check if the you get redirected to the correct page. For example, regular user should see "10.2.50.92/regularUser.php" and for admin you should see "10.2.50.92/adminUser.php"
-- Unit Test 3
+### Unit Test 3
  - Step 1
    - Go back to the register screen
    - Toggle modify Carts for user

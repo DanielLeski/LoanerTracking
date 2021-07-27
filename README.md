@@ -1,10 +1,6 @@
 # LoanerTracking
 
-## PHP Client for Chromebook Loaners
-
-### Step 1: Have a requirement list
-### Step 2: Work with people that know what they want .. gl
-
+## PHP Client with MySql
 ## Overview:
 This is a quickly made project to track students on who, what, when checked out a device such as a laptop or charger and if they returned it back in or not.
 

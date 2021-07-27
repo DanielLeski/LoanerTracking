@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<?php include_once('/home/administrator/LoanerTracking/backend/update.php'); 
-      include_once('/home/administrator/LoanerTracking/backend/user.php');
+<?php include_once('/Users/smol/fun/LoanerTracking/backend/update.php'); 
+      include_once('/Users/smol/fun/LoanerTracking/backend/user.php');
 ?>
 <body onload="removeInputsAndCarts()">
 <div class="container">
@@ -12,10 +12,9 @@
 <script type=text/javascript>
 function removeInputsAndCarts() {
  document.getElementById('input').style.display = "none";
- document.getElementById('data').style.display = "none";
 }
 </script>
-``
+
 <?php
  #Inilizing objects that are needed
   $sqlUpdate = new sqlUpdater;
@@ -162,7 +161,7 @@ function removeInputsAndCarts() {
 <article class="chckin" id="chckin">
 <input type="checkbox" id="checkin" name="c" value="checkin" onclick="cin()"/>
 <div id="cin" class="cin">
-<span>
+<span style="text-align:center">
 Check In Device
 </span>
 </div>
@@ -178,7 +177,7 @@ Check Out Device
 </article>
 
 <article id="repairDevice" class="repair">
-<input type="checkbox" id="repair" name="c" value="repair" onclick="repair()"/>
+<input type="checkbox" id="repair" name="c" value="repair" onclick="repair1()"/>
 <div id="rp" class="rp">
 <span>
 Repair Device
@@ -216,59 +215,75 @@ Out Of Long Term Loaner
 <script language="JavaScript" type="text/javascript">
 
 function cin() {
-   alert("Check In Selected");
    //document.getElementById('input').style.display = "none"; 
-   document.getElementById('checkout').style.display = "none"
-
+   document.getElementById('chckout').style.display = "none"
    document.getElementById('repairDevice').style.display = "none";
    document.getElementById('returnRepair').style.display = "none";
    document.getElementById('longTermLoanerDevice').style.display = "none";
    document.getElementById('outOfLongTermLoaner').style.display = "none";
+   var p = document.getElementById('chckin');
+   p.setAttribute('style', 'top:-10px;left:70px;');
    document.getElementById('input').style.display = "block";
-   document.getElementById('data').style.display = "block";
 }
 
-function cout(){
-   alert("Check Out Selected");
+function cout() {
    document.getElementById('chckin').style.display = "none";
-   document.getElementById('repair').style.display = "none";
+   document.getElementById('repairDevice').style.display = "none";
    document.getElementById('returnRepair').style.display = "none";
    document.getElementById('longTermLoanerDevice').style.display = "none";
    document.getElementById('outOfLongTermLoaner').style.display = "none";
+   var p = document.getElementById('chckout');
+   p.setAttribute('style', 'top:-10px;left:70px;');
+   document.getElementById('input').style.display = "block";
+
  }
- function repair() {
-   alert('repair is selected');
+
+ function repair1() {
    document.getElementById('chckin').style.display = "none";
-   document.getElementById('chchout').style.display= "none";
+   document.getElementById('chckout').style.display= "none";
    document.getElementById('returnRepair').style.display = "none";
    document.getElementById('longTermLoanerDevice').style.display = "none";
-   document.getElementById('outoflongtermloaner').style.display = "none";
+   document.getElementById('outOfLongTermLoaner').style.display = "none";
+   var p = document.getElementById('repairDevice');
+   p.setAttribute('style', 'top:-10px;left:70px;');
+   document.getElementById('input').style.display = "block";
+
 }
 
-function returnRepair1() {
-   alert('test');
+function returnRepair1() { 
    document.getElementById('chckin').style.display = "none";
-   document.getElementById('chchout').style.display= "none";
+   document.getElementById('chckout').style.display= "none";
    document.getElementById('repairDevice').style.display = "none";
    document.getElementById('longTermLoanerDevice').style.display = "none";
    document.getElementById('outOfLongTermLoaner').style.display = "none";
+   var p = document.getElementById('returnRepair');
+   p.setAttribute('style', 'top:-10px;left:70px;');
+   document.getElementById('input').style.display = "block";
+
 }
 
 function longTermRepairForStudent() {
-   alert('longTermRepairSelected');
    document.getElementById('chckin').style.display = "none";
    document.getElementById('chckout').style.display = "none";
    document.getElementById('repairDevice').style.display = "none";
    document.getElementById('returnRepair').style.display = "none";
    document.getElementById('outOfLongTermLoaner').style.display = "none";
+   var p = document.getElementById('longTermLoanerDevice');
+   p.setAttribute('style', 'top:-10px;left:70px;');
+   document.getElementById('input').style.display = "block";
+
 }
 
 function returnLongTermRepair() {
-   alert('returnLongTermRepair');
+   document.getElementById('chckin').style.display = "none";
    document.getElementById('chckout').style.display = "none";
    document.getElementById('repairDevice').style.display = "none";
    document.getElementById('returnRepair').style.display = "none";
    document.getElementById('longTermLoanerDevice').style.display = "none";
+   var p = document.getElementById('outOfLongTermLoaner');
+   p.setAttribute('style', 'top:-10px;left:70px;');
+   document.getElementById('input').style.display = "block";
+
  }
 </script>
 
@@ -316,7 +331,7 @@ function returnLongTermRepair() {
 <br>
 <div>
 <br>
-<input style="font-size:12pt;" type="submit" class="Button" name="Submit" value="Submit">
+<input style="font-size:12pt;" type="submit" class="Button" id="submitInfo" name="Submit" value="Submit">
 </div>
 </form>
 </div>
@@ -366,6 +381,11 @@ Cancel
 <!--- Style of the background and the tables --->
 <style>
 
+span {
+position: relative;
+top: 30px; 
+}
+
 table, th, td {
   margin-left:auto;
   margin-right:auto;
@@ -409,7 +429,7 @@ fieldset{
 .log {
   position:absolute;
   bottom: 200px;
-  left:810px;
+  left:780px;
   top:800px;
 }
 
@@ -420,7 +440,20 @@ fieldset{
   top:800px;
 }
 
+.data {
+ position:relative;
+ right:50px;
+}
+ 
+input[type=submit] {
+ padding: 16px 32px;
+ border: none;
+ cursor: pointer;
+}
+
 body {
+width:1920px;
+height:1080px;
 background: rgb(18, 181, 231);
 }
 .container{
@@ -563,7 +596,7 @@ width: 140px;
 height: 100px;
 margin: 5px;
 float: left;
-border: 2px solid #add8e6;
+border: 3px solid #add8e6;
 box-sizing: border-box;
 }
 
@@ -593,9 +626,10 @@ cursor: pointer;
 .input {
  position: absolute;
  text-align: center;
- left:800px;
+ left:850px;
  top: 475px;
 }
+
 .con {
  text-align: center;
 }
@@ -610,9 +644,10 @@ cursor: pointer;
 }
 
 .repair {
- width:145px;
+ width:140.5px;
  bottom: 110px;
- left:230px; 
+ left:230px;
+ margin: 2 auto;
 }
 
 .returnRepair {
@@ -626,9 +661,22 @@ cursor: pointer;
 }
 
 .oltr {
- bottom:110px;
- right:70px; 
+ bottom:220px;
+ right:-230px; 
+}
 
+.submitInfo {
+ padding 15px 32px;
+ text-align: center;
+ display: inline-block;
+ font-size: 18px;
+}
+
+button {
+  padding 15px 32px;
+ text-align: center;
+ display: inline-block;
+ font-size: 16px;
 }
 
 input[type=checkbox]:checked ~ div {

@@ -5,8 +5,8 @@ session_start();
 
 #Getting a connection to the mysql database
 $servername = "127.0.0.1";
-$username = "dan";
-$password = "Password123#@!";
+$username = "root";
+$password = "pk1212";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
 
@@ -140,6 +140,7 @@ function add_checkout_time_cb($barcode) {
 function add_checkout_time_c($barcode) {
  global $conn;
  global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date('Y-m-d H:i:s');
  $sql = "UPDATE loaner_chargers SET Check_out='$CHECK_OUT_TIME' WHERE id='$barcode'";
  $conn->query($sql);
 
@@ -151,15 +152,17 @@ function add_checkout_time_c($barcode) {
 function set_check_out_back_to_null() {
  global $conn;
  global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date('Y-m-d H:i:s');
  $sql = "UPDATE CBcartAll SET Check_out=NULL, Student_Number=NULL WHERE Checked_in IS NOT NULL";
  $conn->query($sql);
 
 }
 
 #sets the chargers checkout field back to null after getting a checkin date
-function set_checkout_back_to_null_c() {
+function set_check_out_back_to_null_c() {
  global $conn;
  global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date('Y-m-d H:i:s');
  $sql = "UPDATE loaner_chargers SET Check_out=NULL, Student_Number=NULL, WHERE Check_in IS NOT NULL'";
  $conn->query($sql);
 
@@ -169,6 +172,7 @@ function set_checkout_back_to_null_c() {
 function add_check_out_time_in_log($barcode) {
  global $conn;
  global $CHECK_OUT_TIME;
+ $CHECK_OUT_TIME = date('Y-m-d H:i:s');
  $sql = "UPDATE chromebook_log SET Check_out='$CHECK_OUT_TIME' WHERE ITR='$barcode'";
  $conn->query($sql);
 
@@ -178,8 +182,8 @@ function add_check_out_time_in_log($barcode) {
 #Function to return te charger 
 function return_charger($id, $barcode) {
  global $conn;
- global $CHECK_OUT_TIME;
- $CHECK_OUT_TIME = date('Y-m-d H:i:s');
+ global $CHECK_IN_TIME;
+ $CHECK_IN_TIME = date('Y-m-d H:i:s');
  $sql = "UPDATE loaner_chargers SET Cadd_checkin_to_chromebooksheck_in='$CHECK_IN_TIME' WHERE id='$barcode' AND Student_Number='$id'";
  $conn->query($sql);
 

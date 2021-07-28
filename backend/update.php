@@ -34,8 +34,8 @@ function check_if_active_statff($email) {
 function check_if_active_student($id) {
  global $conn;
  $sql = "SELECT * FROM ps WHERE Student_Number='$id'";
-$result = $conn->query($sql);
-$getNumRows = mysqli_num_rows($result);
+ $result = $conn->query($sql);
+ $getNumRows = mysqli_num_rows($result);
  if($getNumRows == 1) {
   return true;
  } else {

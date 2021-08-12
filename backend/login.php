@@ -13,6 +13,8 @@ class Login {
  #Checks the access and role of the user logining in so that they are redirected 
  function check_for_access($user, $pass) {
   global $conn;
+  $user = $conn->real_escape_string($user);
+  $pass = $conn->real_escape_string($pass);
   $md5password = md5($pass);
   $sql = "SELECT * FROM users WHERE username='$user' AND password='$md5password'";
   $result = $conn->query($sql);

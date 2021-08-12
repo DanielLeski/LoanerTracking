@@ -5,14 +5,14 @@ $username = "dan";
 $password = "Password123#@!";
 $db_name = "newphp";
 $conn = mysqli_connect($servername, $username, $password, $db_name);
-
-include("Mail.php");
+#add full path to mail.php
+include("/usr/share/php/Mail.php");
 $host = "10.2.50.105";
 $from = "ebuckley@dupage88.net";
 $return = "ebuckley@dupage88.net";
 $subject = "Returning a Loaner Device";
-$body = "";
-$to = "";
+$body = "return your device";
+$to = "2222222@dupage88.org";
 
 global $smtp;
 global $headers;
@@ -30,10 +30,15 @@ $smtp = Mail::factory('smtp',
 
 $sql = "SELECT * FROM CBcartAll WHERE Check_out!='' AND Check_in='' AND LongTermRepair='0'";
 $result = $conn->query($sql);
-while ($ar = $result->fetch_row()) {
-  #$GLOBALS['to'] = $ar[2] ."@dupage88.org";
-  #$GLOBALS['body'] = "Hi, please return device '$ar[3]' back to room A201";
-  #$mail=$smtp->send($to, $header, $body); 
-  #print_r($ar[3] . "\n");
+while($ar = mysqli_fetch_array($result)) {
+ $itr = $ar['ITR'];
+ $student_name= $ar['Student_Number'];
+ $GLOBALS['to'] = $student_name."@dupage88.org"; 
+ $GLOBALS['body'] = "Hi, please return device '$itr' by the end of the day please!";
+ $mail = $smtp->send($to, $headers, $body);
 }
+
+#$GLOBALS['to'] = "2222222@dupage88.org";
+#$GLOBALS['body'] = "Hi, please return device back to room A201"; 
+#$mail=$smtp->send($to, $headers, $body); 
 ?>

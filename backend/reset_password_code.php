@@ -10,7 +10,8 @@ $conn = mysqli_connect($servername, $username, $password, $db_name);
 
 
 class reset_password {
-function reset_password($user, $pass, $code) {
+
+function reset_password_for_user($user, $pass, $code) {
  global $conn;
  $code = intval($code);
  $sql = "SELECT * FROM access_code ORDER BY id DESC LIMIT 0,1";
@@ -20,7 +21,9 @@ function reset_password($user, $pass, $code) {
  if ($code == $getAccessCode['code']) {
   $password_encrypt = md5($pass);
   $sql = "UPDATE users SET password='$password_encrypt' WHERE username='$user'";
-  $conn->query($sql);
+  if($conn->query($sql)) {
+   echo "Password is updated!";
+  }
 
   }
  } 

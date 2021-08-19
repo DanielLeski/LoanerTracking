@@ -28,7 +28,7 @@ $headers = array('From'=>$from,
 $smtp = Mail::factory('smtp',
        array('host' => $host));
 
-$sql = "SELECT * FROM CBcartAll WHERE Check_out!='' AND Check_in='' AND LongTermRepair='0'";
+$sql = "SELECT * FROM CBcartAll WHERE Check_out='' AND Check_in!='' AND LongTermRepair='0' AND StudentDeviceInRepair=''";
 $result = $conn->query($sql);
 while($ar = mysqli_fetch_array($result)) {
  $itr = $ar['ITR'];

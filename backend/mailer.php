@@ -39,4 +39,5 @@ function send_email_access_code($user) {
  echo "Access Code is sent to the email!";
  }
 }
-?>
+?
+

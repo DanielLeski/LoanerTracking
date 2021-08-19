@@ -30,7 +30,8 @@ class Login {
      header("Location:regularUser.php");
      exit();
      } else {
-     header("Location:ss.php");
+     #the troll never happened .. 
+     #header("Location:ss.php");
      }
     }
   }

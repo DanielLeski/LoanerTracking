@@ -23,9 +23,8 @@ This uses mySQL to track information into a database but the commented code with
 
 
 ## WORK THAT IS LEFT:
-
-
-
+- Auto Complete fields
+- Fix frontend design for the register screen
 
 
 

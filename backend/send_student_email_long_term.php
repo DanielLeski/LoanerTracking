@@ -34,7 +34,7 @@ while($ar = mysqli_fetch_array($result)) {
  $itr = $ar['ITR'];
  $student_name= $ar['Student_Number'];
  $GLOBALS['to'] = $student_name."@dupage88.org"; 
- $GLOBALS['body'] = "Hi, please return device '$itr' by the end of the day please!";
+ $GLOBALS['body'] = "Hi, please return device '$itr' by the end of the day please!, your actual device is ready for pickup!";
  $mail = $smtp->send($to, $headers, $body);
 }
 

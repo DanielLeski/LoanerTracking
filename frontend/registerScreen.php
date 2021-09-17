@@ -50,7 +50,7 @@ body{font: 14px sans-serif;}
     $code = $_POST['access'];
     $reg->modify_user_permissions($username, $password, $role, $code);
     header("Location:index.php");
-  } elseif($selected_radio = "carts_modify") {
+  } elseif($selected_radio == "carts_modify") {
     $modify_carts = 'checked';
     $user = $_POST['username'];
     $password = $_POST['password'];
